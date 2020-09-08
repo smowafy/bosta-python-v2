@@ -3,17 +3,18 @@ import requests
 import json
 import logging
 
-with open('config.json') as configFile:
+with open(os.path.join(os.getcwd(),'bosta-python/bosta/config.json')) as configFile:
     config = json.load(configFile)
 
 class PickupRequests:
-    def __init__(self):
-        self.apiKey = os.getenv('BOSTA_API_KEY', '')
-
-    def getBusinessPickupRequests(self, pageId=0):
+    
+    apiKey = os.getenv('BOSTA_API_KEY', '')
+    
+    @classmethod
+    def getBusinessPickupRequests(cls, pageId=0):
         try:
             headers = {
-                "Authorization": self.apiKey
+                "Authorization": cls.apiKey
             }
             params = {
                 "pageId": pageId 
@@ -23,8 +24,9 @@ class PickupRequests:
         except Exception as exp:
             raise exp
     
+    @classmethod
     def createNewPickup(
-        self, scheduledDate, scheduledTimeSlot,
+        cls, scheduledDate, scheduledTimeSlot,
         contactPersonName, contactPersonPhone,
         contactPersonEmail, notes="",
         ):
@@ -41,7 +43,7 @@ class PickupRequests:
                 "notes": notes,
             }
             headers = {
-                "Authorization": self.apiKey
+                "Authorization": cls.apiKey
             }
             response = requests.post(config['BOSTA_URL'] + "pickups", headers=headers, payload=payload)
             return response.json()

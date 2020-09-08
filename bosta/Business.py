@@ -3,18 +3,18 @@ import requests
 import json
 import logging
 
-with open('config.json') as configFile:
+with open(os.path.join(os.getcwd(),'bosta-python/bosta/config.json')) as configFile:
     config = json.load(configFile)
 
 class BusinessInfo:
-    def __init__(self):
-        self.apiKey = os.getenv('BOSTA_API_KEY', '')
-
-    def getBusinessSubAccount(self, pageId=0):
+    apiKey = os.getenv('BOSTA_API_KEY', '')
+    
+    @classmethod
+    def getBusinessSubAccount(cls, pageId=0):
         try:
             logging.info('Get Business Sub Account')
             headers = {
-                "Authorization": self.apiKey
+                "Authorization": cls.apiKey
             }
             params = {
                 "pageId": pageId 

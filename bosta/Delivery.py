@@ -8,45 +8,48 @@ from bosta.utils.Address import *
 from bosta.utils.Receiver import *
 from bosta.utils.DeliverySpecs import *
 
-with open('config.json') as configFile:
+with open(os.path.join(os.getcwd(),'bosta-python/bosta/config.json')) as configFile:
     config = json.load(configFile)
 
 class Delivery:
-    def __init__(self):
-        self.apiKey = os.getenv('BOSTA_API_KEY', '')
-
-    def getBusinessDeliveries(self):
+    apiKey = os.getenv('BOSTA_API_KEY', '')
+    
+    @classmethod
+    def getBusinessDeliveries(cls):
         try:
             headers = {
-                "Authorization": self.apiKey
+                "Authorization": cls.apiKey
             }
             response = requests.get(config['BOSTA_URL'] + "deliveries", headers=headers)
             return response.json()
         except Exception as exp:
             raise exp
-
-    def getDeliveriesSummary(self):
+    
+    @classmethod
+    def getDeliveriesSummary(cls):
         try:
             headers = {
-                "Authorization": self.apiKey
+                "Authorization": cls.apiKey
             }
             response = requests.get(config['BOSTA_URL']+ "deliveries/in-progress/summary", headers=headers)
-            return response.json
+            return response.json()
         except Exception as exp:
             raise exp
 
-    def getAirwayBill(self, ids):
+    @classmethod
+    def getAirwayBill(cls, ids):
         try:
             headers = {
-                "Authorization": self.apiKey
+                "Authorization": cls.apiKey
             }
             response = requests.get(config['BOSTA_URL']+ "deliveries/awb?ids="+ids, headers=headers)
-            return response.json
+            return response.json()
         except Exception as exp:
             raise exp
     
+    @classmethod
     def createDelivery(
-       self, deliveryType, dropOffAddress,
+       cls, deliveryType, dropOffAddress,
        receiver, cashOnDelivery, specs,
     ):
         """Create new delivery authenticated by business api key
@@ -66,7 +69,7 @@ class Delivery:
         try:
             logging.info('Create New Delivery')
             headers = {
-                "Authorization": self.apiKey
+                "Authorization": cls.apiKey
             }
             payload = {     
                 "type": deliveryType,
