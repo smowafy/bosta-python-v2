@@ -35,8 +35,8 @@ class Pickup:
                 headers=headers,
                 payload=createPickupRequest.toJsonPayload()
             )
-            instance = CreatePickupResponse(response.json())
-            return instance.fromJsonPayload()
+            return CreatePickupResponse(response.json())
+        
         except Exception as exp:
             logging.error(exp)
             raise exp
