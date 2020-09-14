@@ -8,13 +8,14 @@ from bosta.utils.Address import *
 from bosta.utils.Receiver import *
 from bosta.utils.DeliverySpecs import *
 
-with open(os.path.join(os.getcwd(),'bosta-python/bosta/config.json')) as configFile:
-    config = json.load(configFile)
+from .CreateDeliveryRequest import CreateDeliveryRequest
+from .CreateDeliveryResponse import CreateDeliveryResponse
 
 class Delivery:
-    apiKey = os.getenv('BOSTA_API_KEY', '')
-    
-    @classmethod
+
+    def __init__(self, apiClient):
+        self.apiClient = apiClient
+
     def getBusinessDeliveries(cls):
         try:
             headers = {
@@ -47,38 +48,19 @@ class Delivery:
         except Exception as exp:
             raise exp
     
-    @classmethod
-    def createDelivery(
-       cls, deliveryType, dropOffAddress,
-       receiver, cashOnDelivery, specs,
-    ):
-        """Create new delivery authenticated by business api key
+    
+    def createDelivery(self, createDeliveryRequest):
 
-        Parameters:
-        deliveryType (int)
-        specs (DeliverySpecs)
-        dropOffAddress (Address)
-        cashOnDelivery (int): cash on delivert amount
-        receiver (Receiver)
-
-  
-        Returns:
-        object:Returning new delivery tracking number
-
-        """
         try:
             logging.info('Create New Delivery')
             headers = {
-                "Authorization": cls.apiKey
+                "Authorization": self.apiClient.apiKey
             }
-            payload = {     
-                "type": deliveryType,
-                "specs": specs,
-                "cod": cashOnDelivery,
-                "dropOffAddress": dropOffAddress,
-                "receiver": receiver,
-            }
-            response = requests.post(config['BOSTA_URL'] + "deliveries", headers=headers, payload=payload)
+            payload = createDeliveryRequest.toJSONPayload()
+            response = requests.post(
+                self.apiClient['BOSTA_URL'] + "deliveries",
+                headers=headers, payload=payload
+            )
             return response.json()
         except Exception as exp:
             logging.error(exp)
