@@ -8,49 +8,52 @@ from bosta.utils.Address import *
 from bosta.utils.Receiver import *
 from bosta.utils.DeliverySpecs import *
 
-from .CreateDeliveryRequest import CreateDeliveryRequest
+from . import ListAllDeliveriesRequest, ListAllDeliveriesResponse, UpdateDeliveryRequest, UpdateDeliveryResponse
+from . import PrintAWBRequest, PrintAWBResponse
+from . import TerminateDeliveryRequest
+
+from . import CreateDeliveryRequest
 from .CreateDeliveryResponse import CreateDeliveryResponse
+
+
+
 
 class Delivery:
 
     def __init__(self, apiClient):
         self.apiClient = apiClient
 
-    def getBusinessDeliveries(cls):
+    def listDeliveries(self, listAllDeliveriesRequest):
         try:
+            logging.info("list all business deliveries")
             headers = {
-                "Authorization": cls.apiKey
+                "Authorization": self.apiClient.apiKey
             }
-            response = requests.get(config['BOSTA_URL'] + "deliveries", headers=headers)
-            return response.json()
+            response = requests.get(
+                self.apiClient.apiBase + "deliveries" + listAllDeliveriesRequest.toUrlQueryParamters(), 
+                headers=headers
+            )
+            return ListAllDeliveriesResponse(response.json())
         except Exception as exp:
             raise exp
     
-    @classmethod
-    def getDeliveriesSummary(cls):
-        try:
-            headers = {
-                "Authorization": cls.apiKey
-            }
-            response = requests.get(config['BOSTA_URL']+ "deliveries/in-progress/summary", headers=headers)
-            return response.json()
-        except Exception as exp:
-            raise exp
 
-    @classmethod
-    def getAirwayBill(cls, ids):
+    def printAirWayBill(self, printAWBRequest):
         try:
+            logging.info("Print airway bill")
             headers = {
-                "Authorization": cls.apiKey
+                "Authorization": self.apiClient.apiKey
             }
-            response = requests.get(config['BOSTA_URL']+ "deliveries/awb?ids="+ids, headers=headers)
-            return response.json()
+            response = requests.get(
+                self.apiClient.apiBase + "deliveries/awb?" + printAWBRequest.toUrlQueryParamters(), 
+                headers=headers
+            )
+            return PrintAWBResponse(response.json())
         except Exception as exp:
             raise exp
     
     
     def createDelivery(self, createDeliveryRequest):
-
         try:
             logging.info('Create New Delivery')
             headers = {
@@ -58,15 +61,43 @@ class Delivery:
             }
             payload = createDeliveryRequest.toJSONPayload()
             response = requests.post(
-                self.apiClient['BOSTA_URL'] + "deliveries",
+                self.apiClient.apiBase + "deliveries",
                 headers=headers, payload=payload
             )
-            return response.json()
+            return CreateDeliveryResponse(response.json())
         except Exception as exp:
             logging.error(exp)
             raise exp
 
+    def updateDelivery(self, updateDeliveryRequest):
+        try:
+            logging.info('Update Delivery')
+            headers = {
+                "Authorization": self.apiClient.apiKey
+            }
+            payload = updateDeliveryRequest.toJSONPayload()
+            response = requests.patch(
+                self.apiClient.apiBase + "deliveries" + updateDeliveryRequest.get_deliveryId(),
+                headers=headers, payload=payload
+            )
+            return UpdateDeliveryResponse(response.json())
+        except Exception as exp:
+            logging.error(exp)
+            raise exp
 
+    def terminateDelivery(self, terminateDeliveryRequest):
+        try:
+            logging.info("list all business deliveries")
+            headers = {
+                "Authorization": self.apiClient.apiKey
+            }
+            response = requests.delete(
+                self.apiClient.apiBase + "deliveries/" + terminateDeliveryRequest.get_deliveryId(), 
+                headers=headers
+            )
+            return TerminateDeliveryResponse(response.json())
+        except Exception as exp:
+            raise exp
     
 
 if __name__ == '__main__' and __package__ is None:
