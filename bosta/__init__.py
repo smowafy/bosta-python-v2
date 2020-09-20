@@ -15,7 +15,7 @@
 # OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-Logging package for Python. Based on PEP 282 and comments thereto in
+Bosta package for Python. Based on PEP 282 and comments thereto in
 comp.lang.python.
 
 Copyright (C) 2020. All Rights Reserved.
@@ -23,14 +23,10 @@ Copyright (C) 2020. All Rights Reserved.
 To use, simply 'import bosta'!
 """
 
+from .Deliveries import *
+from .Pickups import *
 
-
-from .Delivery import Delivery
-from .Business import BusinessInfo
-from .PickupRequest import PickupRequests
-
-
-__author__  = "Bosta <sohila.bogdady2012@gmail.com>"
+__author__  = "sohila bogdady <sohila.bogdady2012@gmail.com>"
 __status__  = "development"
 __version__ = "0.1"
 __date__    = "07 Sep 2020"

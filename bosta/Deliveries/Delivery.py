@@ -4,18 +4,24 @@ import requests
 import json
 import logging
 
-from bosta.utils.Address import *
-from bosta.utils.Receiver import *
-from bosta.utils.DeliverySpecs import *
+from bosta.utils.Address import Address
+from bosta.utils.Receiver import Receiver
+from bosta.utils.DeliverySpecs import DeliverySpecs
 
-from . import ListAllDeliveriesRequest, ListAllDeliveriesResponse, UpdateDeliveryRequest, UpdateDeliveryResponse
-from . import PrintAWBRequest, PrintAWBResponse
-from . import TerminateDeliveryRequest
+from .ListAllDeliveriesRequest import ListAllDeliveriesRequest
+from .ListAllDeliveriesResponse import ListAllDeliveriesResponse
 
-from . import CreateDeliveryRequest
+from .UpdateDeliveryRequest import UpdateDeliveryRequest
+from .UpdateDeliveryResponse import  UpdateDeliveryResponse
+
+from .PrintAWBRequest import PrintAWBRequest
+from .PrintAWBResponse import PrintAWBResponse
+
+from .TerminateDeliveryRequest import TerminateDeliveryRequest
+from .TerminateDeliveryResponse import TerminateDeliveryResponse
+
+from .CreateDeliveryRequest import CreateDeliveryRequest
 from .CreateDeliveryResponse import CreateDeliveryResponse
-
-
 
 
 class Delivery:
@@ -23,7 +29,7 @@ class Delivery:
     def __init__(self, apiClient):
         self.apiClient = apiClient
 
-    def listDeliveries(self, listAllDeliveriesRequest):
+    def listAll(self, listAllDeliveriesRequest: ListAllDeliveriesRequest):
         try:
             logging.info("list all business deliveries")
             headers = {
@@ -38,7 +44,7 @@ class Delivery:
             raise exp
     
 
-    def printAirWayBill(self, printAWBRequest):
+    def printAirWayBill(self, printAWBRequest: PrintAWBRequest):
         try:
             logging.info("Print airway bill")
             headers = {
@@ -53,7 +59,7 @@ class Delivery:
             raise exp
     
     
-    def createDelivery(self, createDeliveryRequest):
+    def create(self, createDeliveryRequest: CreateDeliveryRequest):
         try:
             logging.info('Create New Delivery')
             headers = {
@@ -69,7 +75,7 @@ class Delivery:
             logging.error(exp)
             raise exp
 
-    def updateDelivery(self, updateDeliveryRequest):
+    def update(self, updateDeliveryRequest: UpdateDeliveryRequest):
         try:
             logging.info('Update Delivery')
             headers = {
@@ -85,7 +91,7 @@ class Delivery:
             logging.error(exp)
             raise exp
 
-    def terminateDelivery(self, terminateDeliveryRequest):
+    def terminate(self, terminateDeliveryRequest: TerminateDeliveryRequest):
         try:
             logging.info("list all business deliveries")
             headers = {

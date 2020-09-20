@@ -16,7 +16,7 @@ class CreatePickupRequest:
         self.noOfPackages = noOfPackages
         self.notes = notes
     
-    def toJsonPayload(self):
+    def toJSONPayload(self):
         return {
            "businessId":  self.businessId,
            "scheduledDate": self.scheduledDate,

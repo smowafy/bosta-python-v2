@@ -1,8 +1,11 @@
+from bosta.utils.Address import Address
+from bosta.utils.Receiver import Receiver
+from bosta.utils.DeliverySpecs import DeliverySpecs
 
 
 class CreateDeliveryRequest:
 
-    def __init__(self, deliveryType, cod, dropOffAddress, receiver):
+    def __init__(self, deliveryType, cod, dropOffAddress:Address, receiver: Receiver):
         """Create new delivery 
 
         Parameters:

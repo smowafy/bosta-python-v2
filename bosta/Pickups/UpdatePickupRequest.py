@@ -15,7 +15,7 @@ class UpdatePickupRequest:
     def get_id(self):
         return self._id
     
-    def toJsonPayload(self):
+    def toJSONPayload(self):
 
         return {
            "businessId":  self.businessId,

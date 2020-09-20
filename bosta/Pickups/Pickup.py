@@ -33,7 +33,7 @@ class Pickup:
             response = requests.post(
                 self.apiClient.apiBase + "pickups",
                 headers=headers,
-                payload=createPickupRequest.toJsonPayload()
+                payload=createPickupRequest.toJSONPayload()
             )
             return CreatePickupResponse(response.json())
         
@@ -50,7 +50,7 @@ class Pickup:
             response = requests.put(
                 self.apiClient.apiBase + "pickups/" + updatePickupRequest.get_id(),
                 headers=headers,
-                payload=updatePickupRequest.toJsonPayload()
+                payload=updatePickupRequest.toJSONPayload()
             )
             return UpdatePickupResponse(response)
         except Exception as exp:

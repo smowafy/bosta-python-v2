@@ -21,7 +21,7 @@ class UpdateDeliveryRequest:
     def get_deliveryId(self): 
         return self._id
 
-    def toJsonPayload(self):
+    def toJSONPayload(self):
         payload = {}
         if self.receiver is not None:
             payload['receiver'] = self.receiver
