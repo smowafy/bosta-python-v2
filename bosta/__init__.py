@@ -27,8 +27,8 @@ from .Deliveries import *
 from .Pickups import *
 from .utils import *
 
-__author__  = "sohila bogdady <sohila.bogdady2012@gmail.com>"
+__author__  = "sohila bogdady <sdk@bosta.co>"
 __status__  = "development"
-__version__ = "0.1"
+__version__ = "0.9"
 __date__    = "07 Sep 2020"
 __name__ = "Bosta"

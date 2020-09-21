@@ -3,8 +3,8 @@ from setuptools import setup
 setup(
    name='Bosta',
    version='0.1.0',
-   author='sohilaBoghdady',
-   author_email='sohila.bogdady@bosta.com',
+   author='bosta',
+   author_email='sdk@bosta.com',
    scripts=[],
    url='http://pypi.python.org/pypi/bosta/',
    license='LICENSE.txt',
