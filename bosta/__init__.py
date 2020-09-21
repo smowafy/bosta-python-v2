@@ -25,6 +25,7 @@ To use, simply 'import bosta'!
 
 from .Deliveries import *
 from .Pickups import *
+from .utils import *
 
 __author__  = "sohila bogdady <sohila.bogdady2012@gmail.com>"
 __status__  = "development"

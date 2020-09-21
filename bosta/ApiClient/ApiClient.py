@@ -1,5 +1,5 @@
 
-class ApiClient:
+class BostaClient:
     def __init__(self, apiKey, apiBase):
         self.apiKey = apiKey
         self.apiBase = apiBase

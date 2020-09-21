@@ -8,39 +8,38 @@ from bosta.utils.Address import Address
 from bosta.utils.Receiver import Receiver
 from bosta.utils.DeliverySpecs import DeliverySpecs
 
-from .ListAllDeliveriesRequest import ListAllDeliveriesRequest
+from bosta.ApiClient.ApiClient import BostaClient
+
+from .ListAllDeliveriesRequest import ListAllDeliveriesRequest 
 from .ListAllDeliveriesResponse import ListAllDeliveriesResponse
-
-from .UpdateDeliveryRequest import UpdateDeliveryRequest
-from .UpdateDeliveryResponse import  UpdateDeliveryResponse
-
-from .PrintAWBRequest import PrintAWBRequest
-from .PrintAWBResponse import PrintAWBResponse
-
-from .TerminateDeliveryRequest import TerminateDeliveryRequest
-from .TerminateDeliveryResponse import TerminateDeliveryResponse
-
+from . import UpdateDeliveryRequest, UpdateDeliveryResponse
+from . import PrintAWBRequest, PrintAWBResponse
+from . import TerminateDeliveryRequest, TerminateDeliveryResponse
 from .CreateDeliveryRequest import CreateDeliveryRequest
 from .CreateDeliveryResponse import CreateDeliveryResponse
 
-
 class Delivery:
 
-    def __init__(self, apiClient):
-        self.apiClient = apiClient
+    def __init__(self):
+        self.apiClient = BostaClient(
+            os.environ.get('BOSTA_API_KEY'),
+            os.environ.get('BOSTA_API_BASE')
+        )
 
-    def listAll(self, listAllDeliveriesRequest: ListAllDeliveriesRequest):
+    def listAll(self, listAllDeliveriesRequest: ListAllDeliveriesRequest)-> ListAllDeliveriesResponse:
         try:
             logging.info("list all business deliveries")
+            url = self.apiClient.apiBase + "deliveries" 
             headers = {
                 "Authorization": self.apiClient.apiKey
             }
-            response = requests.get(
-                self.apiClient.apiBase + "deliveries" + listAllDeliveriesRequest.toUrlQueryParamters(), 
-                headers=headers
-            )
-            return ListAllDeliveriesResponse(response.json())
+            params = listAllDeliveriesRequest.toUrlQueryParamters()
+            response = requests.get(url, params = params, headers=headers)
+            if (response.status_code) != 200: return response.text.message
+            instance = ListAllDeliveriesResponse(response.json())
+            return instance
         except Exception as exp:
+            logging.error(exp)
             raise exp
     
 
@@ -59,17 +58,16 @@ class Delivery:
             raise exp
     
     
-    def create(self, createDeliveryRequest: CreateDeliveryRequest):
+    def create(self, createDeliveryRequest: CreateDeliveryRequest)-> CreateDeliveryResponse:
         try:
-            logging.info('Create New Delivery')
-            headers = {
-                "Authorization": self.apiClient.apiKey
-            }
             payload = createDeliveryRequest.toJSONPayload()
-            response = requests.post(
-                self.apiClient.apiBase + "deliveries",
-                headers=headers, payload=payload
-            )
+            logging.info('Create New Delivery: Payload '+ str(payload))
+            url = self.apiClient.get_apiBase() + "deliveries"
+            headers = {
+                "Authorization": self.apiClient.get_apiKey()
+            }
+            response = requests.post(url, headers=headers, data=payload)
+            if (response.status_code) != 201: return response.text
             return CreateDeliveryResponse(response.json())
         except Exception as exp:
             logging.error(exp)
@@ -106,6 +104,6 @@ class Delivery:
             raise exp
     
 
-if __name__ == '__main__' and __package__ is None:
+if __name__ == 'bosta.Delivery' and __package__ is None:
     from os import sys, path
     sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))

@@ -17,8 +17,13 @@ class Receiver:
     def get_phone(self, phone):
         return self.phone
 
-    def __str__(self):
-        return str(self.firstName,self.lastName,self.email,self.phone)
+    def toJson(self):
+        return {
+            "firstName": self.firstName,
+            "lastName": self.lastName,
+            "email": self.email,
+            "phone": self.phone
+        }
 
 
 if __name__ == '__main__' and __package__ is None:

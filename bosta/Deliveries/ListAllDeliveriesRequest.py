@@ -6,6 +6,7 @@ class ListAllDeliveriesRequest:
         self.limit = limit
     
     def toUrlQueryParamters(self):
-        params = "&pageNumber=" + self.pageNumber if self.pageNumber is not None else ""
-        params += "&limit=" + self.limit if self.limit is not None else ""
+        params = {}
+        if self.pageNumber is not None: params["pageNumber"] = self.pageNumber
+        if self.limit is not None: params["limit"] = self.limit
         return params

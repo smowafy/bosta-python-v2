@@ -30,7 +30,7 @@ class CreateDeliveryRequest:
             "type": self.type,
             "cod": self.cod,
             "dropOffAddress": self.dropOffAddress,
-            "receiver": self.receiver
+            "receiver": self.receiver.toJson()
         }
 
 
