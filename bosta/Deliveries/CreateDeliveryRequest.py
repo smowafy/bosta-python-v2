@@ -1,3 +1,5 @@
+import json
+
 from bosta.utils.Address import Address
 from bosta.utils.Receiver import Receiver
 from bosta.utils.DeliverySpecs import DeliverySpecs
@@ -26,11 +28,11 @@ class CreateDeliveryRequest:
         self.receiver = receiver
 
     def toJSONPayload(self): 
-        return {
+        return json.dumps({
             "type": self.type,
             "cod": self.cod,
-            "dropOffAddress": self.dropOffAddress,
-            "receiver": self.receiver.toJson()
-        }
+            "dropOffAddress": self.dropOffAddress.toJSON(),
+            "receiver": self.receiver.toJSON()
+        })
 
 

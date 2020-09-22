@@ -2,8 +2,8 @@
 class UpdateDeliveryResponse:
 
     def __init__(self, jsonPayload):
-        self.fromJsonPayload(jsonPayload)
+        self.fromJSONPayload(jsonPayload)
     
-    def fromJsonPayload(self, jsonPayload):
+    def fromJSONPayload(self, jsonPayload):
         self.message = jsonPayload["message"]
         self._id = jsonPayload["_id"]

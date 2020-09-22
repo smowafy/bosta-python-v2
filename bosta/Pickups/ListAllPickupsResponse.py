@@ -3,8 +3,8 @@
 class ListAllPickupResponse:
 
     def __init__(self, jsonResponseObj):
-        self.pickups = self.fromJsonPayload
+        self.pickups = self.fromJSONPayload
     
-    def fromJsonPayload(self, jsonObj):
+    def fromJSONPayload(self, jsonObj):
         data = jsonObj.result.pickups
         return data

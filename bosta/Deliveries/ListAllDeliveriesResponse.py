@@ -3,9 +3,9 @@ import logging
 
 class ListAllDeliveriesResponse:
     def __init__(self, jsonPayload):
-        self.deliveries, self.count = self.fromJsonPayload(jsonPayload)
+        self.deliveries, self.count = self.fromJSONPayload(jsonPayload)
     
-    def fromJsonPayload(self, jsonPayload):
+    def fromJSONPayload(self, jsonPayload):
         try:
             data = jsonPayload
             deliveries = []

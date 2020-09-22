@@ -3,9 +3,9 @@
 class CreatePickupResponse:
  
     def __init__(self, jsonResponseObj):
-        self.fromJsonPayload(jsonResponseObj)
+        self.fromJSONPayload(jsonResponseObj)
 
-    def fromJsonPayload(self, responseObj):
+    def fromJSONPayload(self, responseObj):
         self._id = responseObj["_id"]
         self.puid = responseObj["puid"]
         self.businessId = responseObj["businessId"]

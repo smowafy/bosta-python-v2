@@ -12,9 +12,12 @@ from bosta.ApiClient.ApiClient import BostaClient
 
 from .ListAllDeliveriesRequest import ListAllDeliveriesRequest 
 from .ListAllDeliveriesResponse import ListAllDeliveriesResponse
-from . import UpdateDeliveryRequest, UpdateDeliveryResponse
-from . import PrintAWBRequest, PrintAWBResponse
-from . import TerminateDeliveryRequest, TerminateDeliveryResponse
+from .UpdateDeliveryRequest import UpdateDeliveryRequest
+from .UpdateDeliveryResponse import UpdateDeliveryResponse
+from .PrintAWBRequest import PrintAWBRequest
+from .PrintAWBResponse import PrintAWBResponse
+from .TerminateDeliveryRequest import TerminateDeliveryRequest
+from .TerminateDeliveryResponse import TerminateDeliveryResponse
 from .CreateDeliveryRequest import CreateDeliveryRequest
 from .CreateDeliveryResponse import CreateDeliveryResponse
 
@@ -64,7 +67,8 @@ class Delivery:
             logging.info('Create New Delivery: Payload '+ str(payload))
             url = self.apiClient.get_apiBase() + "deliveries"
             headers = {
-                "Authorization": self.apiClient.get_apiKey()
+                "Authorization": self.apiClient.get_apiKey(),
+                "content-type": "application/json"
             }
             response = requests.post(url, headers=headers, data=payload)
             if (response.status_code) != 201: return response.text

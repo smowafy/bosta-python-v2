@@ -17,7 +17,7 @@ class Receiver:
     def get_phone(self, phone):
         return self.phone
 
-    def toJson(self):
+    def toJSON(self):
         return {
             "firstName": self.firstName,
             "lastName": self.lastName,

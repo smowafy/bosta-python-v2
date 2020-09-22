@@ -1,29 +1,43 @@
 class Address:
-    def __init__(self, firstLine, secondLine, zone, city):
+    def __init__(
+        self, cityCode: str ,firstLine: str, zone=None,
+        secondLine=None, district=None, buildingNumber=None,
+        floor=None, apartment=None
+        ):
+        self.cityCode = cityCode
         self.firstLine = firstLine
+        self.zone = zone
         self.secondLine = secondLine
-        self.city = {
-            'name': city
-        }
-        self.zone = {
-            'name': zone
-        }
+        self.district = district
+        self.buildingNumber = buildingNumber
+        self.floor = floor
+        self.apartment = apartment
 
-    def get_firstLine(self, street):
+    def get_firstLine(self):
         return self.firstLine
 
-    def get_secondLine(self, city):
-        return self.city
+    def get_secondLine(self):
+        return self.secondLine
 
-    def get_city(self, state):
-        return self.city
+    def get_city(self):
+        return self.cityCode
 
-    def get_zone(self, zipcode):
+    def get_zone(self):
         return self.zone
 
-    def __str__(self):
-        return str(self.firstLine,self.secondLine,self.city,self.zone)
+    def toJSON(self):
+        addressObj = {
+            "cityCode": self.cityCode,
+            "firstLine": self.firstLine
+        }
+        if self.zone is not None: addressObj["zone"] = self.zone
+        if self.secondLine is not None: addressObj["secondLine"] = self.secondLine
+        if self.district is not None: addressObj["district"] = self.district
+        if self.buildingNumber is not None: addressObj["buildingNumber"] = self.buildingNumber
+        if self.floor is not None: addressObj["floor"] = self.floor
+        if self.apartment is not None: addressObj["apartment"] = self.apartment
 
+        return addressObj
 
 if __name__ == '__main__' and __package__ is None:
     from os import sys, path
