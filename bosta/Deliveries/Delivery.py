@@ -34,7 +34,7 @@ class Delivery:
             logging.info("list all business deliveries")
             url = self.apiClient.get_apiBase() + "deliveries" 
             headers = {
-                "Authorization": self.apiClient.apiKey
+                "Authorization": self.apiClient.get_apiKey()
             }
             params = listAllDeliveriesRequest.toUrlQueryParamters()
             response = requests.get(url, params = params, headers=headers)
@@ -52,7 +52,7 @@ class Delivery:
             url = self.apiClient.get_apiBase() + "deliveries/awb" 
             params = printAWBRequest.toUrlQueryParamters()
             headers = {
-                "Authorization": self.apiClient.apiKey
+                "Authorization": self.apiClient.get_apiKey()
             }
             response = requests.get(url, params=params, headers=headers)
             if (response.status_code) != 200: return response.text.message
@@ -81,14 +81,13 @@ class Delivery:
     def update(self, updateDeliveryRequest: UpdateDeliveryRequest):
         try:
             logging.info('Update Delivery')
+            url = self.apiClient.get_apiBase() + "deliveries/" + str(updateDeliveryRequest.get_deliveryId())
             headers = {
-                "Authorization": self.apiClient.apiKey
+                "Authorization": self.apiClient.get_apiKey()
             }
             payload = updateDeliveryRequest.toJSONPayload()
-            response = requests.patch(
-                self.apiClient.apiBase + "deliveries" + updateDeliveryRequest.get_deliveryId(),
-                headers=headers, payload=payload
-            )
+            response = requests.patch(url, headers=headers, data=payload)
+            if (response.status_code) != 200: return response.text
             return UpdateDeliveryResponse(response.json())
         except Exception as exp:
             logging.error(exp)
@@ -96,16 +95,17 @@ class Delivery:
 
     def terminate(self, terminateDeliveryRequest: TerminateDeliveryRequest):
         try:
-            logging.info("list all business deliveries")
+            logging.info("Terminate Delivery")
+            url = self.apiClient.get_apiBase() + "deliveries/" + str(terminateDeliveryRequest.get_deliveryId())
+
             headers = {
-                "Authorization": self.apiClient.apiKey
+                "Authorization": self.apiClient.get_apiKey()
             }
-            response = requests.delete(
-                self.apiClient.apiBase + "deliveries/" + terminateDeliveryRequest.get_deliveryId(), 
-                headers=headers
-            )
+            response = requests.delete(url,headers=headers)
+            if (response.status_code) != 200: return response.text
             return TerminateDeliveryResponse(response.json())
         except Exception as exp:
+            logging.error(exp)
             raise exp
     
 

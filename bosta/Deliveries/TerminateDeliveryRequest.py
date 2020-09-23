@@ -6,3 +6,5 @@ class TerminateDeliveryRequest:
     
     def get_deliveryId(self):
         return self._id
+    
+    def __str__(self): return self._id

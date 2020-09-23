@@ -7,3 +7,5 @@ class UpdateDeliveryResponse:
     def fromJSONPayload(self, jsonPayload):
         self.message = jsonPayload["message"]
         self._id = jsonPayload["_id"]
+    
+    def __str__(self): return self.message

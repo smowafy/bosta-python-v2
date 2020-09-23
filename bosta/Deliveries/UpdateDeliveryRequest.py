@@ -1,12 +1,14 @@
+import json
+
 from ..utils import Receiver, Address
 class UpdateDeliveryRequest:
 
     def __init__(
-        self, deliveryId: int ,receiver: Receiver, 
-        pickUpAddress: Address, dropOffAddress: Address,
-        returnAddress: Address,notes: str, 
-        businessReference:str,
-        webhookUrl: str, cod: int
+        self, deliveryId: int ,receiver=None, 
+        pickUpAddress=None, dropOffAddress=None,
+        returnAddress=None,notes=None, 
+        businessReference=None,
+        webhookUrl=None, cod=None
         ):
         self._id = deliveryId
         self.receiver = receiver
@@ -24,13 +26,13 @@ class UpdateDeliveryRequest:
     def toJSONPayload(self):
         payload = {}
         if self.receiver is not None:
-            payload['receiver'] = self.receiver
+            payload['receiver'] = self.receiver.toJSON()
         if self.pickUpAddress is not None:
-            payload['pickUpAddress'] = self.pickUpAddress
+            payload['pickUpAddress'] = self.pickUpAddress.toJSON()
         if self.dropOffAddress is not None:
-            payload['dropOffAddress'] = self.dropOffAddress
+            payload['dropOffAddress'] = self.dropOffAddress.toJSON()
         if self.returnAddress is not None:
-            payload['returnAddress'] = self.returnAddress
+            payload['returnAddress'] = self.returnAddress.toJSON()
         if self.notes is not None:
             payload['notes'] = self.notes
         if self.businessReference is not None:
@@ -39,7 +41,7 @@ class UpdateDeliveryRequest:
             payload['webhookUrl'] = self.webhookUrl
         if self.cod is not None:
             payload['cod'] = self.cod    
-        return payload
+        return json.dumps(payload)
 
 
    
