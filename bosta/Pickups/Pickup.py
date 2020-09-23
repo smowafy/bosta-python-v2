@@ -77,21 +77,19 @@ class Pickup:
             if (response.status_code != 200): return response.text
             return ListAllPickupResponse(response.json())
         except Exception as exp:
+            logging.error(exp)
             raise exp
 
     def get(self, getPickupDetailsRequest):
         try:
             logging.info("Get Pickup")
-
+            url = self.apiClient.get_apiBase() + "pickups/" + str(getPickupDetailsRequest.get_pickupId())
             headers = {
-                "Authorization": self.apiClient.apiKey
+                "Authorization": self.apiClient.get_apiKey()
             }
-            response = requests.get(
-                self.apiClient.apiBase + "pickups/" + getPickupDetailsRequest.get_id(),
-                headers=headers
-            )
-            pickupObj = GetPickupDetailsResponse(response.json().message)
-            return pickupObj
+            response = requests.get(url, headers=headers)
+            if (response.status_code != 200): return response.text
+            return GetPickupDetailsResponse(response.json())
         except Exception as exp:
             logging.error(exp)
             raise exp
@@ -99,20 +97,14 @@ class Pickup:
     def delete(self, deletePickupRequest):
         try:
             logging.info("Delete Pickup")
-
+            url = self.apiClient.apiBase + "pickups/" + str(deletePickupRequest.get_pickupId())
             headers = {
                 "Authorization": self.apiClient.apiKey
             }
-            response = requests.delete(
-                self.apiClient.apiBase + "pickups/" + deletePickupRequest.get_id(),
-                headers=headers
-            )
-            return DeletePickupResonse(response)
+            response = requests.delete(url,headers=headers)
+            if (response.status_code != 200): return response.text
+            return DeletePickupResonse(response.json())
         except Exception as exp:
             logging.error(exp)
             raise exp
 
-
-if __name__ == '__main__' and __package__ is None:
-    from os import sys, path
-    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))

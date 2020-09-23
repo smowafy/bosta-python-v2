@@ -1,7 +1,7 @@
 
 class DeletePickupRequest:
-    def __init__(self, _id):
-        self._id = _id
+    def __init__(self, pickupId):
+        self._id = pickupId
 
-    def get_id(self): 
+    def get_pickupId(self): 
         return self._id

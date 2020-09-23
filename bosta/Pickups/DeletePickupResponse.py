@@ -1,8 +1,13 @@
 
 
 class DeletePickupResonse:
-    def __init__(self, response):
-        self.statusCode = response.status_code
-        self.message = response.json().message
+    def __init__(self, jsonResponse):
+        self.message = self.fromJsonResponse(jsonResponse)
+    
+    def fromJsonResponse(self, jsonResponse):
+        return jsonResponse["message"]
+    
+    def __str__(self):
+        self.message
 
     

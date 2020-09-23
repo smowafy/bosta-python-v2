@@ -1,7 +1,11 @@
 
 
 class GetPickupDetailsRequest:
-    def __init__(self, _id):
-        self._id = _id
+    def __init__(self, pickupId):
+        self._id = pickupId
 
-    def get_id(self): return self._id
+    def get_pickupId(self):
+        return self._id
+
+    def __str__(self):
+        return str(self._id)
