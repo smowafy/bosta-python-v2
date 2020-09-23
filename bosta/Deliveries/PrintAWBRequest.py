@@ -5,5 +5,6 @@ class PrintAWBRequest:
         self.ids = deliveryIds
 
     def toUrlQueryParamters(self):
-        params = "&ids=" + self.ids if self.ids.len() is not 0 else ""
+        params = {}
+        if len(self.ids) is not 0: params["ids"] = self.ids
         return params

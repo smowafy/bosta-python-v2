@@ -32,7 +32,7 @@ class Delivery:
     def listAll(self, listAllDeliveriesRequest: ListAllDeliveriesRequest)-> ListAllDeliveriesResponse:
         try:
             logging.info("list all business deliveries")
-            url = self.apiClient.apiBase + "deliveries" 
+            url = self.apiClient.get_apiBase() + "deliveries" 
             headers = {
                 "Authorization": self.apiClient.apiKey
             }
@@ -49,15 +49,16 @@ class Delivery:
     def printAirWayBill(self, printAWBRequest: PrintAWBRequest):
         try:
             logging.info("Print airway bill")
+            url = self.apiClient.get_apiBase() + "deliveries/awb" 
+            params = printAWBRequest.toUrlQueryParamters()
             headers = {
                 "Authorization": self.apiClient.apiKey
             }
-            response = requests.get(
-                self.apiClient.apiBase + "deliveries/awb?" + printAWBRequest.toUrlQueryParamters(), 
-                headers=headers
-            )
+            response = requests.get(url, params=params, headers=headers)
+            if (response.status_code) != 200: return response.text.message
             return PrintAWBResponse(response.json())
         except Exception as exp:
+            logging.error(exp)
             raise exp
     
     
