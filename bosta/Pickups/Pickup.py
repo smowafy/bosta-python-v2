@@ -48,18 +48,20 @@ class Pickup:
             logging.error(exp)
             raise exp
 
-    def update(self, updatePickupRequest):
+    def update(self, updatePickupRequest: UpdatePickupRequest) -> UpdatePickupResponse:
         try:
             logging.info("Update Pickup")
+            url = self.apiClient.get_apiBase() + "pickups/" + str(updatePickupRequest.get_id())
             headers = {
-                "Authorization": self.apiClient.apiKey
+                "Authorization": self.apiClient.get_apiKey()
             }
             response = requests.put(
-                self.apiClient.apiBase + "pickups/" + updatePickupRequest.get_id(),
+                url,
                 headers=headers,
                 data=updatePickupRequest.toJSONPayload()
             )
-            return UpdatePickupResponse(response)
+            if (response.status_code != 200): return response.text
+            return UpdatePickupResponse(response.json())
         except Exception as exp:
             logging.error(exp)
             raise exp
