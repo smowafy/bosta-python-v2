@@ -5,16 +5,16 @@ class Receiver:
         self.email = email
         self.phone = phone
 
-    def get_firstName(self, firstName):
+    def get_firstName(self):
         return self.firstName
 
-    def get_lastName(self, lastName):
+    def get_lastName(self):
         return self.lastName
 
-    def get_email(self, email):
+    def get_email(self):
         return self.email
 
-    def get_phone(self, phone):
+    def get_phone(self):
         return self.phone
 
     def toJSON(self):
@@ -25,7 +25,3 @@ class Receiver:
             "phone": self.phone
         }
 
-
-if __name__ == '__main__' and __package__ is None:
-    from os import sys, path
-    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))

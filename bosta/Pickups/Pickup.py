@@ -3,38 +3,45 @@ import os
 import logging
 import requests
 
-from bosta.ApiClient import ApiClient
+from bosta.ApiClient.ApiClient import BostaClient
+
+from .ListAllPickupsRequest import ListAllPickupsRequest
+from .ListAllPickupsResponse import ListAllPickupResponse
 
 from .CreatePickupRequest import CreatePickupRequest 
 from .CreatePickupResponse import CreatePickupResponse
+
 from .GetPickupDetailsRequest import GetPickupDetailsRequest
 from .GetPickupDetailsResponse import GetPickupDetailsResponse
-from .ListAllPickupsRequest import ListAllPickupsRequest
-from .ListAllPickupsResponse import ListAllPickupResponse
+
 from .UpdatePickupRequest import UpdatePickupRequest
 from .UpdatePickupResponse import UpdatePickupResponse
+
 from .DeletePickupRequest import DeletePickupRequest
 from .DeletePickupResponse import DeletePickupResonse
 
 
 class Pickup:
     def __init__(self):
-        self.apiClient = ApiClient(
-            os.getenv('BOSTA_API_KEY', ''),
-            os.getenv('BOSTA_API_BASE', ''),
+        self.apiClient = BostaClient(
+            os.environ.get('BOSTA_API_KEY'),
+            os.environ.get('BOSTA_API_BASE')
         )
     
-    def create(self, createPickupRequest):
+    def create(self, createPickupRequest: CreatePickupRequest)-> CreatePickupResponse:
         try:
             logging.info("Create New Pickup")
+            url = self.apiClient.get_apiBase() + "pickups"
             headers = {
-                "Authorization": self.apiClient.apiKey
+                "Authorization": self.apiClient.get_apiKey(),
+                "content-type": "application/json"
             }
             response = requests.post(
-                self.apiClient.apiBase + "pickups",
+                url,
                 headers=headers,
-                payload=createPickupRequest.toJSONPayload()
+                data=createPickupRequest.toJSONPayload()
             )
+            if (response.status_code != 200): return response.text
             return CreatePickupResponse(response.json())
         
         except Exception as exp:
@@ -50,7 +57,7 @@ class Pickup:
             response = requests.put(
                 self.apiClient.apiBase + "pickups/" + updatePickupRequest.get_id(),
                 headers=headers,
-                payload=updatePickupRequest.toJSONPayload()
+                data=updatePickupRequest.toJSONPayload()
             )
             return UpdatePickupResponse(response)
         except Exception as exp:
