@@ -43,7 +43,6 @@ class Pickup:
             )
             if (response.status_code != 200): return response.text
             return CreatePickupResponse(response.json())
-        
         except Exception as exp:
             logging.error(exp)
             raise exp
@@ -67,16 +66,15 @@ class Pickup:
             raise exp
 
     
-    def listAll(self, listAllPickupsRequest):
+    def listAll(self, listAllPickupsRequest: ListAllPickupsRequest) -> ListAllPickupResponse:
         try:
+            url = self.apiClient.apiBase + "pickups"
             headers = {
-                "Authorization": self.apiClient.apiKey
+                "Authorization": self.apiClient.get_apiKey()
             }
-            params = listAllPickupsRequest.toQueryParams()
-            response = requests.get(
-                self.apiClient.apiBase + "pickups", 
-                params= params, headers=headers
-            )
+            params = listAllPickupsRequest.toQueryParamters()
+            response = requests.get(url, params= params, headers=headers)
+            if (response.status_code != 200): return response.text
             return ListAllPickupResponse(response.json())
         except Exception as exp:
             raise exp
