@@ -14,3 +14,6 @@ from .PrintAWBResponse import PrintAWBResponse
 
 from .TerminateDeliveryRequest import TerminateDeliveryRequest
 from .TerminateDeliveryResponse import TerminateDeliveryResponse
+
+from .TrackDeliveryRequest import TrackDeliveryRequest
+from .TrackDeliveryResponse import TrackDeliveryResponse

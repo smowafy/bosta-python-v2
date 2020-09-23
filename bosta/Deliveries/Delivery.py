@@ -20,6 +20,8 @@ from .TerminateDeliveryRequest import TerminateDeliveryRequest
 from .TerminateDeliveryResponse import TerminateDeliveryResponse
 from .CreateDeliveryRequest import CreateDeliveryRequest
 from .CreateDeliveryResponse import CreateDeliveryResponse
+from .TrackDeliveryRequest import TrackDeliveryRequest
+from .TrackDeliveryResponse import TrackDeliveryResponse
 
 class Delivery:
 
@@ -46,7 +48,7 @@ class Delivery:
             raise exp
     
 
-    def printAirWayBill(self, printAWBRequest: PrintAWBRequest):
+    def printAirWayBill(self, printAWBRequest: PrintAWBRequest) -> PrintAWBResponse:
         try:
             logging.info("Print airway bill")
             url = self.apiClient.get_apiBase() + "deliveries/awb" 
@@ -78,7 +80,7 @@ class Delivery:
             logging.error(exp)
             raise exp
 
-    def update(self, updateDeliveryRequest: UpdateDeliveryRequest):
+    def update(self, updateDeliveryRequest: UpdateDeliveryRequest)->  UpdateDeliveryResponse:
         try:
             logging.info('Update Delivery')
             url = self.apiClient.get_apiBase() + "deliveries/" + str(updateDeliveryRequest.get_deliveryId())
@@ -93,7 +95,7 @@ class Delivery:
             logging.error(exp)
             raise exp
 
-    def terminate(self, terminateDeliveryRequest: TerminateDeliveryRequest):
+    def terminate(self, terminateDeliveryRequest: TerminateDeliveryRequest)-> TerminateDeliveryResponse:
         try:
             logging.info("Terminate Delivery")
             url = self.apiClient.get_apiBase() + "deliveries/" + str(terminateDeliveryRequest.get_deliveryId())
@@ -107,8 +109,19 @@ class Delivery:
         except Exception as exp:
             logging.error(exp)
             raise exp
-    
 
-if __name__ == 'bosta.Delivery' and __package__ is None:
-    from os import sys, path
-    sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+    def track(self, trackDeliveryRequest: TrackDeliveryRequest)-> TrackDeliveryResponse:
+        try:
+            logging.info('Track Delivery')
+            url = self.apiClient.get_apiBase() + "deliveries/" + str(trackDeliveryRequest.get_deliveryId()) + "/state-history"
+            headers = {
+                "Authorization": self.apiClient.get_apiKey()
+            }
+            response = requests.get(url, headers=headers)
+            if (response.status_code) != 200: return response.text
+            return TrackDeliveryResponse(response.json())
+        except Exception as exp:
+            logging.error(exp)
+            raise exp
+
+    
