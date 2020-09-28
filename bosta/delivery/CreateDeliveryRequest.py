@@ -8,18 +8,17 @@ from bosta.utils.DeliverySpecs import DeliverySpecs
 class CreateDeliveryRequest:
 
     def __init__(self, deliveryType, cod, dropOffAddress:Address, receiver: Receiver):
-        """Create new delivery 
+        """ Initialize new instance from CreateDeliveryRequest class
 
         Parameters:
         deliveryType (int)
         specs (DeliverySpecs)
         dropOffAddress (Address)
-        cashOnDelivery (int): cash on delivert amount
+        cashOnDelivery (int): Cash on delivery amount
         receiver (Receiver)
 
   
-        Returns:
-        object:Returning new delivery tracking number
+        Returns: instance from CreateDeliveryRequest
 
         """
         self.type = deliveryType
@@ -28,6 +27,11 @@ class CreateDeliveryRequest:
         self.receiver = receiver
 
     def toJSONPayload(self): 
+        """ 
+        Returns: 
+        JSON object from current instance
+
+        """ 
         return json.dumps({
             "type": self.type,
             "cod": self.cod,

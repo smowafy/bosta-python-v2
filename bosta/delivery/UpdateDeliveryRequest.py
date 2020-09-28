@@ -1,8 +1,8 @@
 import json
 
 from ..utils import Receiver, Address
-class UpdateDeliveryRequest:
 
+class UpdateDeliveryRequest:
     def __init__(
         self, deliveryId: int ,receiver=None, 
         pickUpAddress=None, dropOffAddress=None,
@@ -10,6 +10,22 @@ class UpdateDeliveryRequest:
         businessReference=None,
         webhookUrl=None, cod=None
         ):
+        """ Initialize new instance from UpdateDeliveryRequest class
+
+        Parameters:
+        deliveryId (str): Delivery Id
+        specs (DeliverySpecs)
+        pickUpAddress (Address, optinal)
+        dropOffAddress (Address, optinal)
+        returnAddress (Address, optinal)
+        cod (int, optinal): Cash on delivery amount
+        receiver (Receiver, optinal)
+        businessReference (str, optinal): Business refrence
+        webhookUrl (str, optinal)
+
+        Returns: instance from UpdateDeliveryRequest
+
+        """
         self._id = deliveryId
         self.receiver = receiver
         self.pickUpAddress = pickUpAddress
@@ -24,6 +40,11 @@ class UpdateDeliveryRequest:
         return self._id
 
     def toJSONPayload(self):
+        """ 
+        Returns: 
+        JSON object from current instance
+
+        """ 
         payload = {}
         if self.receiver is not None:
             payload['receiver'] = self.receiver.toJSON()

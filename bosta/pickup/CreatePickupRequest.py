@@ -8,6 +8,21 @@ class CreatePickupRequest:
         scheduledTimeSlot: str, contactPerson: ContactPerson,
         businessId=None, businessLocationId=None,
         warehouseId=None, noOfPackages=None, notes=None):
+
+        """ Initialize new instance from CreatePickupRequest class
+
+        Parameters:
+        scheduledDate (str): Pickup scheduled date
+        scheduledTimeSlot (str): "10:00 to 13:00" or "13:00 to 16:00"
+        contactPerson (ContactPerson)
+        businessId (str)
+        businessLocationId (str)
+        warehouseId (str)
+        noOfPackages (int)
+        notes (str)
+  
+        Returns: instance from CreatePickupRequest
+        """
         
         self.businessId = businessId
         self.scheduledDate = scheduledDate
@@ -19,6 +34,11 @@ class CreatePickupRequest:
         self.warehouseId = warehouseId
     
     def toJSONPayload(self):
+        """ 
+        Returns: 
+        JSON object from current instance
+
+        """ 
         payload = {
            "scheduledDate": self.scheduledDate,
            "scheduledTimeSlot": self.scheduledTimeSlot,

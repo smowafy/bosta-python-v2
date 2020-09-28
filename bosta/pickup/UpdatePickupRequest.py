@@ -6,7 +6,23 @@ class UpdatePickupRequest:
         scheduledTimeSlot=None, contactPerson=None,
         businessLocationId=None, warehouseId=None,
         noOfPackages=None, notes=None):
+        """ Initialize new instance from UpdatePickupRequest class
 
+        Parameters:
+        _id (str): Pickup Id
+        businessId (str)
+        scheduledDate (str)
+        scheduledTimeSlot (str)
+        contactPerson (ContactPerson)
+        businessLocationId (str)
+        warehouseId (str)
+        noOfPackages (str)
+        notes (str)
+
+  
+        Returns: instance from UpdatePickupRequest
+
+        """
         self._id = _id    
         self.businessId = businessId
         self.scheduledDate = scheduledDate
@@ -21,6 +37,11 @@ class UpdatePickupRequest:
         return self._id
     
     def toJSONPayload(self):
+        """ 
+        Returns: 
+        JSON object from current instance
+
+        """ 
         payload = {}    
         if self.scheduledDate is not None:
             payload['scheduledDate'] = self.scheduledDate
