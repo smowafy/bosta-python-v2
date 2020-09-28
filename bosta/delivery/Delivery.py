@@ -9,18 +9,18 @@ from bosta.utils.DeliverySpecs import DeliverySpecs
 
 from bosta.apiClient.ApiClient import ApiClient
 
-from .ListAllDeliveriesRequest import ListAllDeliveriesRequest 
-from .ListAllDeliveriesResponse import ListAllDeliveriesResponse
-from .UpdateDeliveryRequest import UpdateDeliveryRequest
-from .UpdateDeliveryResponse import UpdateDeliveryResponse
-from .PrintAWBRequest import PrintAWBRequest
-from .PrintAWBResponse import PrintAWBResponse
-from .TerminateDeliveryRequest import TerminateDeliveryRequest
-from .TerminateDeliveryResponse import TerminateDeliveryResponse
-from .CreateDeliveryRequest import CreateDeliveryRequest
-from .CreateDeliveryResponse import CreateDeliveryResponse
-from .TrackDeliveryRequest import TrackDeliveryRequest
-from .TrackDeliveryResponse import TrackDeliveryResponse
+from .list.ListAllDeliveriesRequest import ListAllDeliveriesRequest 
+from .list.ListAllDeliveriesResponse import ListAllDeliveriesResponse
+from .update.UpdateDeliveryRequest import UpdateDeliveryRequest
+from .update.UpdateDeliveryResponse import UpdateDeliveryResponse
+from .printAWB.PrintAWBRequest import PrintAWBRequest
+from .printAWB.PrintAWBResponse import PrintAWBResponse
+from .terminate.TerminateDeliveryRequest import TerminateDeliveryRequest
+from .terminate.TerminateDeliveryResponse import TerminateDeliveryResponse
+from .create.CreateDeliveryRequest import CreateDeliveryRequest
+from .create.CreateDeliveryResponse import CreateDeliveryResponse
+from .track.TrackDeliveryRequest import TrackDeliveryRequest
+from .track.TrackDeliveryResponse import TrackDeliveryResponse
 
 class Delivery:
 

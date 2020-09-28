@@ -4,20 +4,20 @@ import logging
 
 from bosta.apiClient.ApiClient import ApiClient
 
-from .ListAllPickupsRequest import ListAllPickupsRequest
-from .ListAllPickupsResponse import ListAllPickupResponse
+from .list.ListAllPickupsRequest import ListAllPickupsRequest
+from .list.ListAllPickupsResponse import ListAllPickupResponse
 
-from .CreatePickupRequest import CreatePickupRequest 
-from .CreatePickupResponse import CreatePickupResponse
+from .create.CreatePickupRequest import CreatePickupRequest 
+from .create.CreatePickupResponse import CreatePickupResponse
 
-from .GetPickupDetailsRequest import GetPickupDetailsRequest
-from .GetPickupDetailsResponse import GetPickupDetailsResponse
+from .get.GetPickupDetailsRequest import GetPickupDetailsRequest
+from .get.GetPickupDetailsResponse import GetPickupDetailsResponse
 
-from .UpdatePickupRequest import UpdatePickupRequest
-from .UpdatePickupResponse import UpdatePickupResponse
+from .update.UpdatePickupRequest import UpdatePickupRequest
+from .update.UpdatePickupResponse import UpdatePickupResponse
 
-from .DeletePickupRequest import DeletePickupRequest
-from .DeletePickupResponse import DeletePickupResonse
+from .delete.DeletePickupRequest import DeletePickupRequest
+from .delete.DeletePickupResponse import DeletePickupResonse
 
 
 class Pickup:
