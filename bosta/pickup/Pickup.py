@@ -2,7 +2,6 @@
 import os
 import logging
 
-from bosta.apiClient.ApiClient import ApiClient
 
 from .list.ListAllPickupsRequest import ListAllPickupsRequest
 from .list.ListAllPickupsResponse import ListAllPickupResponse
@@ -35,7 +34,7 @@ class Pickup:
         """
         try:
             logging.info("Create New Pickup")
-            url = self.apiClient.get_apiBase() + "pickups"
+            url = self.apiClient.get_apiBase() + "api/v0/pickups"
             headers = {
                 "Authorization": self.apiClient.get_apiKey(),
                 "content-type": "application/json"
@@ -62,7 +61,7 @@ class Pickup:
         """
         try:
             logging.info("Update Pickup")
-            url = self.apiClient.get_apiBase() + "pickups/" + str(updatePickupRequest.get_id())
+            url = self.apiClient.get_apiBase() + "api/v0/pickups/" + str(updatePickupRequest.get_id())
             headers = {
                 "Authorization": self.apiClient.get_apiKey()
             }
@@ -89,7 +88,7 @@ class Pickup:
         Returns: New instance from ListAllPickupResponse.   
         """
         try:
-            url = self.apiClient.apiBase + "pickups"
+            url = self.apiClient.apiBase + "api/v0/pickups"
             headers = {
                 "Authorization": self.apiClient.get_apiKey()
             }
@@ -112,7 +111,7 @@ class Pickup:
         """
         try:
             logging.info("Get Pickup")
-            url = self.apiClient.get_apiBase() + "pickups/" + str(getPickupDetailsRequest.get_pickupId())
+            url = self.apiClient.get_apiBase() + "api/v0/pickups/" + str(getPickupDetailsRequest.get_pickupId())
             headers = {
                 "Authorization": self.apiClient.get_apiKey()
             }
@@ -134,7 +133,7 @@ class Pickup:
         """
         try:
             logging.info("Delete Pickup")
-            url = self.apiClient.apiBase + "pickups/" + str(deletePickupRequest.get_pickupId())
+            url = self.apiClient.apiBase + "api/v0/pickups/" + str(deletePickupRequest.get_pickupId())
             headers = {
                 "Authorization": self.apiClient.apiKey
             }

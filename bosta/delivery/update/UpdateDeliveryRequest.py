@@ -1,6 +1,7 @@
 import json
 
-from ..utils import Receiver, Address
+from bosta.utils.Address import Address
+from bosta.utils.Receiver import Receiver
 
 class UpdateDeliveryRequest:
     def __init__(

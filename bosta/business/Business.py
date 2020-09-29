@@ -31,7 +31,7 @@ class BusinessInfo:
         """ 
         try:
             logging.info('Get Business Sub Account')
-            url  = self.apiClient.get_apiBase() + "businessSubAccount"
+            url  = self.apiClient.get_apiBase() + "api/v0/businessSubAccount"
             headers = {
                 "Authorization": self.apiClient.get_apiKey()
             }

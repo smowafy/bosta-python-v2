@@ -7,7 +7,6 @@ from bosta.utils.Address import Address
 from bosta.utils.Receiver import Receiver
 from bosta.utils.DeliverySpecs import DeliverySpecs
 
-from bosta.apiClient.ApiClient import ApiClient
 
 from .list.ListAllDeliveriesRequest import ListAllDeliveriesRequest 
 from .list.ListAllDeliveriesResponse import ListAllDeliveriesResponse
@@ -38,7 +37,7 @@ class Delivery:
         """
         try:
             logging.info("list all business deliveries")
-            url = self.apiClient.get_apiBase() + "deliveries" 
+            url = self.apiClient.get_apiBase() + "api/v0/deliveries" 
             headers = {
                 "Authorization": self.apiClient.get_apiKey()
             }
@@ -63,7 +62,7 @@ class Delivery:
         """
         try:
             logging.info("Print airway bill")
-            url = self.apiClient.get_apiBase() + "deliveries/awb" 
+            url = self.apiClient.get_apiBase() + "api/v0/deliveries/awb" 
             params = printAWBRequest.toUrlQueryParamters()
             headers = {
                 "Authorization": self.apiClient.get_apiKey()
@@ -88,7 +87,7 @@ class Delivery:
         try:
             payload = createDeliveryRequest.toJSONPayload()
             logging.info('Create New Delivery: Payload '+ str(payload))
-            url = self.apiClient.get_apiBase() + "deliveries"
+            url = self.apiClient.get_apiBase() + "api/v0/deliveries"
             headers = {
                 "Authorization": self.apiClient.get_apiKey(),
                 "content-type": "application/json"
@@ -111,7 +110,7 @@ class Delivery:
         """
         try:
             logging.info('Update Delivery')
-            url = self.apiClient.get_apiBase() + "deliveries/" + str(updateDeliveryRequest.get_deliveryId())
+            url = self.apiClient.get_apiBase() + "api/v0/deliveries/" + str(updateDeliveryRequest.get_deliveryId())
             headers = {
                 "Authorization": self.apiClient.get_apiKey()
             }
@@ -134,7 +133,7 @@ class Delivery:
         """
         try:
             logging.info("Terminate Delivery")
-            url = self.apiClient.get_apiBase() + "deliveries/" + str(terminateDeliveryRequest.get_deliveryId())
+            url = self.apiClient.get_apiBase() + "api/v0/deliveries/" + str(terminateDeliveryRequest.get_deliveryId())
 
             headers = {
                 "Authorization": self.apiClient.get_apiKey()
@@ -157,7 +156,7 @@ class Delivery:
         """
         try:
             logging.info('Track Delivery')
-            url = self.apiClient.get_apiBase() + "deliveries/" + str(trackDeliveryRequest.get_deliveryId()) + "/state-history"
+            url = self.apiClient.get_apiBase() + "api/v0/deliveries/" + str(trackDeliveryRequest.get_deliveryId()) + "/state-history"
             headers = {
                 "Authorization": self.apiClient.get_apiKey()
             }
