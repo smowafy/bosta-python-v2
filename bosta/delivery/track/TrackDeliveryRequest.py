@@ -12,7 +12,7 @@ class TrackDeliveryRequest:
         self._id = deliveryId
     
     def __str__(self):
-        return self._id
+        return str(self._id)
     
     def get_deliveryId(self):
         return self._id

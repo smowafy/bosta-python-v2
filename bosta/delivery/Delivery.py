@@ -43,7 +43,7 @@ class Delivery:
             }
             params = listAllDeliveriesRequest.toUrlQueryParamters()
             response = self.apiClient.send('get', url, params = params, headers=headers)
-            if (response.status_code) != 200: return response.text.message
+            if (response.status_code) != 200: return response.text
             instance = ListAllDeliveriesResponse(response.json())
             return instance
         except Exception as exp:

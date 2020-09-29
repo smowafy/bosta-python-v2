@@ -13,7 +13,7 @@ class City:
             } 
             response = self.apiClient.send(
                 'get',
-                "api/v0/cities",
+                self.apiClient.get_apiBase() + "api/v0/cities",
                 headers
             )
             return response.json()

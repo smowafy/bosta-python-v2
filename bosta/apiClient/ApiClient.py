@@ -1,4 +1,4 @@
-from requests import *
+import requests
 
 from ..delivery import Delivery
 from ..pickup import Pickup
@@ -55,7 +55,7 @@ class ApiClient:
 
             """   
             headers['X-Requested-By'] = 'python-sdk'
-            return method(
+            return getattr(requests, method)(
                 url, headers=headers, params=params,data=data
             )
         except Exception as exp:
