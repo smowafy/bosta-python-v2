@@ -26,8 +26,8 @@ class ApiClient:
         self.apiBase = apiBase
         self.pickup = Pickup(self)
         self.delivery = Delivery(self)
-        self.cities = City(self)
-        self.zones = Zone(self)
+        self.cities = City(self).listAll()
+        self.zones = Zone(self).listAll()
         self.deliveyTypes = DELIVERY_TYPES
         self.pickupTimeSlots = PICKUP_TIME_SLOTS
 
