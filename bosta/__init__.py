@@ -23,8 +23,8 @@ Copyright (C) 2020. All Rights Reserved.
 To use, simply 'import bosta'!
 """
 
-from .Deliveries import *
-from .Pickups import *
+from .delivery import *
+from .pickup import *
 from .utils import *
 
 __author__  = "sohila bogdady <sdk@bosta.co>"
