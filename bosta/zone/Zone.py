@@ -13,7 +13,7 @@ class Zone:
             } 
             response = self.apiClient.send(
                 'get',
-                self.apiClient.get_apiBase() + "api/v0/zones",
+                self.apiClient.get_apiBase() + "api/v1/zones",
                 headers
             )
             return response.json()

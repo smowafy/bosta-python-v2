@@ -34,9 +34,8 @@ class Pickup:
         """
         try:
             logging.info("Create New Pickup")
-            url = self.apiClient.get_apiBase() + "api/v0/pickups"
+            url = self.apiClient.get_apiBase() + "api/v1/pickups"
             headers = {
-                "Authorization": self.apiClient.get_apiKey(),
                 "content-type": "application/json"
             }
             response = self.apiClient.send('post',
@@ -61,14 +60,10 @@ class Pickup:
         """
         try:
             logging.info("Update Pickup")
-            url = self.apiClient.get_apiBase() + "api/v0/pickups/" + str(updatePickupRequest.get_id())
-            headers = {
-                "Authorization": self.apiClient.get_apiKey()
-            }
+            url = self.apiClient.get_apiBase() + "api/v1/pickups/" + str(updatePickupRequest.get_id())
             response = self.apiClient.send(
                 'put',
                 url,
-                headers=headers,
                 data=updatePickupRequest.toJSONPayload()
             )
             if (response.status_code != 200): return response.text
@@ -89,11 +84,8 @@ class Pickup:
         """
         try:
             url = self.apiClient.apiBase + "api/v0/pickups"
-            headers = {
-                "Authorization": self.apiClient.get_apiKey()
-            }
             params = listAllPickupsRequest.toQueryParamters()
-            response = self.apiClient.send('get',url, params= params, headers=headers)
+            response = self.apiClient.send('get',url, params= params)
             if (response.status_code != 200): return response.text
             return ListAllPickupResponse(response.json())
         except Exception as exp:
@@ -111,11 +103,8 @@ class Pickup:
         """
         try:
             logging.info("Get Pickup")
-            url = self.apiClient.get_apiBase() + "api/v0/pickups/" + str(getPickupDetailsRequest.get_pickupId())
-            headers = {
-                "Authorization": self.apiClient.get_apiKey()
-            }
-            response = self.apiClient.send('get',url, headers=headers)
+            url = self.apiClient.get_apiBase() + "api/v1/pickups/" + str(getPickupDetailsRequest.get_pickupId())
+            response = self.apiClient.send('get',url)
             if (response.status_code != 200): return response.text
             return GetPickupDetailsResponse(response.json())
         except Exception as exp:
@@ -133,11 +122,8 @@ class Pickup:
         """
         try:
             logging.info("Delete Pickup")
-            url = self.apiClient.apiBase + "api/v0/pickups/" + str(deletePickupRequest.get_pickupId())
-            headers = {
-                "Authorization": self.apiClient.apiKey
-            }
-            response = self.apiClient.send('delete',url,headers=headers)
+            url = self.apiClient.apiBase + "api/v1/pickups/" + str(deletePickupRequest.get_pickupId())
+            response = self.apiClient.send('delete',url)
             if (response.status_code != 200): return response.text
             return DeletePickupResonse(response.json())
         except Exception as exp:

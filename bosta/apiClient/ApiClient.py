@@ -38,7 +38,7 @@ class ApiClient:
     def get_cities(self): return self.cities
     def get_zones(self): return self.zones
 
-    def send(self, method, url, headers, params=None, data=None):
+    def send(self, method, url, headers={}, params=None, data=None):
         try:
             """ 
             Send HTTP Request 
@@ -55,6 +55,7 @@ class ApiClient:
 
             """   
             headers['X-Requested-By'] = 'python-sdk'
+            headers['Authorization'] = self.apiKey
             return getattr(requests, method)(
                 url, headers=headers, params=params,data=data
             )

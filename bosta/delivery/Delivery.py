@@ -39,12 +39,9 @@ class Delivery:
         """
         try:
             logging.info("list all business deliveries")
-            url = self.apiClient.get_apiBase() + "api/v0/deliveries" 
-            headers = {
-                "Authorization": self.apiClient.get_apiKey()
-            }
+            url = self.apiClient.get_apiBase() + "api/v1/deliveries" 
             params = listAllDeliveriesRequest.toUrlQueryParamters()
-            response = self.apiClient.send('get', url, params = params, headers=headers)
+            response = self.apiClient.send('get', url, params = params)
             if (response.status_code) != 200: return response.text
             instance = ListAllDeliveriesResponse(response.json())
             return instance
@@ -63,11 +60,8 @@ class Delivery:
         """
         try:
             logging.info('Get Delivery')
-            url = self.apiClient.get_apiBase() + "api/v0/deliveries/" + str(trackDeliveryRequest.get_deliveryId())
-            headers = {
-                "Authorization": self.apiClient.get_apiKey()
-            }
-            response = self.apiClient.send('get',url, headers=headers)
+            url = self.apiClient.get_apiBase() + "api/v1/deliveries/" + str(trackDeliveryRequest.get_deliveryId())
+            response = self.apiClient.send('get',url)
             if (response.status_code) != 200: return response.text
             return GetDeliveryDetailsResponse(response.json())
         except Exception as exp:
@@ -85,12 +79,9 @@ class Delivery:
         """
         try:
             logging.info("Print airway bill")
-            url = self.apiClient.get_apiBase() + "api/v0/deliveries/awb" 
+            url = self.apiClient.get_apiBase() + "api/v1/deliveries/awb" 
             params = printAWBRequest.toUrlQueryParamters()
-            headers = {
-                "Authorization": self.apiClient.get_apiKey()
-            }
-            response = self.apiClient.send('get',url, params=params, headers=headers)
+            response = self.apiClient.send('get',url, params=params)
             if (response.status_code) != 200: return response.text.message
             return PrintAWBResponse(response.json())
         except Exception as exp:
@@ -109,9 +100,8 @@ class Delivery:
         try:
             payload = createDeliveryRequest.toJSONPayload()
             logging.info('Create New Delivery: Payload '+ str(payload))
-            url = self.apiClient.get_apiBase() + "api/v0/deliveries"
+            url = self.apiClient.get_apiBase() + "api/v1/deliveries"
             headers = {
-                "Authorization": self.apiClient.get_apiKey(),
                 "content-type": "application/json"
             }
             response = self.apiClient.send('post',url, headers=headers, data=payload)
@@ -132,12 +122,9 @@ class Delivery:
         """
         try:
             logging.info('Update Delivery')
-            url = self.apiClient.get_apiBase() + "api/v0/deliveries/" + str(updateDeliveryRequest.get_deliveryId())
-            headers = {
-                "Authorization": self.apiClient.get_apiKey()
-            }
+            url = self.apiClient.get_apiBase() + "api/v1/deliveries/" + str(updateDeliveryRequest.get_deliveryId())
             payload = updateDeliveryRequest.toJSONPayload()
-            response = self.apiClient.send('patch',url, headers=headers, data=payload)
+            response = self.apiClient.send('patch',url, data=payload)
             if (response.status_code) != 200: return response.text
             return UpdateDeliveryResponse(response.json())
         except Exception as exp:
@@ -156,11 +143,7 @@ class Delivery:
         try:
             logging.info("Terminate Delivery")
             url = self.apiClient.get_apiBase() + "api/v0/deliveries/" + str(terminateDeliveryRequest.get_deliveryId())
-
-            headers = {
-                "Authorization": self.apiClient.get_apiKey()
-            }
-            response = self.apiClient.send('delete',url,headers=headers)
+            response = self.apiClient.send('delete',url)
             if (response.status_code) != 200: return response.text
             return TerminateDeliveryResponse(response.json())
         except Exception as exp:
@@ -178,11 +161,8 @@ class Delivery:
         """
         try:
             logging.info('Track Delivery')
-            url = self.apiClient.get_apiBase() + "api/v0/deliveries/" + str(trackDeliveryRequest.get_deliveryId()) + "/state-history"
-            headers = {
-                "Authorization": self.apiClient.get_apiKey()
-            }
-            response = self.apiClient.send('get',url, headers=headers)
+            url = self.apiClient.get_apiBase() + "api/v1/deliveries/" + str(trackDeliveryRequest.get_deliveryId()) + "/state-history"
+            response = self.apiClient.send('get',url)
             if (response.status_code) != 200: return response.text
             return TrackDeliveryResponse(response.json())
         except Exception as exp:

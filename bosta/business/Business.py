@@ -31,14 +31,11 @@ class BusinessInfo:
         """ 
         try:
             logging.info('Get Business Sub Account')
-            url  = self.apiClient.get_apiBase() + "api/v0/businessSubAccount"
-            headers = {
-                "Authorization": self.apiClient.get_apiKey()
-            }
+            url  = self.apiClient.get_apiBase() + "api/v1/businessSubAccount"
             params = {
                 "pageId": pageId 
             }
-            response = self.apiClient.send('get', url, headers, params)
+            response = self.apiClient.send('get', url, params)
             if (response.status_code != 200): return response.text
             return response.json()
         except Exception as exp:
