@@ -10,6 +10,8 @@ from bosta.utils.DeliverySpecs import DeliverySpecs
 
 from .list.ListAllDeliveriesRequest import ListAllDeliveriesRequest 
 from .list.ListAllDeliveriesResponse import ListAllDeliveriesResponse
+from .get.GetDeliveryDetailsRequest import GetDeliveryDetailsRequest
+from .get.GetDeliveryDetailsResponse import GetDeliveryDetailsResponse
 from .update.UpdateDeliveryRequest import UpdateDeliveryRequest
 from .update.UpdateDeliveryResponse import UpdateDeliveryResponse
 from .printAWB.PrintAWBRequest import PrintAWBRequest
@@ -50,6 +52,27 @@ class Delivery:
             logging.error(exp)
             raise exp
     
+   def get(self, getDeliveryDetailsRequest: GetDeliveryDetailsRequest)-> GetDeliveryDetailsResponse:
+        """
+        Get Delivery.
+
+        Parameters:
+        getDeliveryDetailsRequest (GetDeliveryDetailsRequest)
+
+        Returns: New instance from GetDeliveryDetailsResponse.   
+        """
+        try:
+            logging.info('Get Delivery')
+            url = self.apiClient.get_apiBase() + "api/v0/deliveries/" + str(trackDeliveryRequest.get_deliveryId())
+            headers = {
+                "Authorization": self.apiClient.get_apiKey()
+            }
+            response = self.apiClient.send('get',url, headers=headers)
+            if (response.status_code) != 200: return response.text
+            return GetDeliveryDetailsResponse(response.json())
+        except Exception as exp:
+            logging.error(exp)
+            raise exp
 
     def printAirWayBill(self, printAWBRequest: PrintAWBRequest) -> PrintAWBResponse:
         """
@@ -73,7 +96,6 @@ class Delivery:
         except Exception as exp:
             logging.error(exp)
             raise exp
-    
     
     def create(self, createDeliveryRequest: CreateDeliveryRequest)-> CreateDeliveryResponse:
         """

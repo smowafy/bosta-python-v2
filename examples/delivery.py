@@ -1,8 +1,13 @@
+import os
+
 from bosta.apiClient import ApiClient
 from bosta.delivery import list, create, update, track, printAWB
 from bosta.utils import Receiver, Address, ContactPerson
 
-apiClient = ApiClient("<business-api-key>", "<bosta-base-url>")
+apiKey = os.getenv("BOSTA-API-KEY")
+baseUrl = os.getenv("BOSTA-BASE-URL")
+
+apiClient = ApiClient(apiKey, baseUrl)
 deliveryTypes = apiClient.deliveyTypes
 
 #List Deliveries 

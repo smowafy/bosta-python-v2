@@ -1,8 +1,12 @@
+import os 
+
 from bosta.apiClient import ApiClient
 from bosta.utils import ContactPerson
 from bosta.pickup import create, list, get, update, delete
 
-apiClient = ApiClient("<business-api-key>", "<bosta-base-url>")
+apiKey = os.getenv("BOSTA-API-KEY")
+baseUrl = os.getenv("BOSTA-BASE-URL")
+apiClient = ApiClient(apiKey, baseUrl)
 
 # Create New Pickup
 newPickupId = apiClient.pickup.create(
