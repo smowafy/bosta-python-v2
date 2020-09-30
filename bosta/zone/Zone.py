@@ -13,9 +13,10 @@ class Zone:
             } 
             response = self.apiClient.send(
                 'get',
-                self.apiClient.get_apiBase() + "api/v1/zones",
+                self.apiClient.get_apiBase() + "api/v0/zones",
                 headers
             )
+            if (response.status_code != 200): return response.text
             return response.json()
         except Exception as exp:
             raise exp
