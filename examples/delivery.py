@@ -1,7 +1,7 @@
 import os
 
 from bosta.apiClient import ApiClient
-from bosta.delivery import list, create, update, track, printAWB
+from bosta.delivery import list, create, update, track, printAWB, get
 from bosta.utils import Receiver, Address, ContactPerson
 
 apiKey = os.getenv("BOSTA-API-KEY")
@@ -26,3 +26,6 @@ apiClient.delivery.printAirWayBill(printAWB.PrintAWBRequest([deliveryId]))
 
 #Track Delivery
 apiClient.delivery.track(track.TrackDeliveryRequest(deliveryId))
+
+#Get Delivery
+apiClient.delivery.get(get.GetDeliveryDetailsRequest(deliveryId))
