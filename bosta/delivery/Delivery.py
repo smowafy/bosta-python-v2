@@ -49,7 +49,7 @@ class Delivery:
             logging.error(exp)
             raise exp
     
-   def get(self, getDeliveryDetailsRequest: GetDeliveryDetailsRequest)-> GetDeliveryDetailsResponse:
+    def get(self, getDeliveryDetailsRequest: GetDeliveryDetailsRequest)-> GetDeliveryDetailsResponse:
         """
         Get Delivery.
 
