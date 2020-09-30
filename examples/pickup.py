@@ -28,3 +28,6 @@ apiClient.pickup.get(
 apiClient.pickup.update(update.UpdatePickupRequest(
     newPickupId, contactPerson=ContactPerson ("user", "010193155922", "user@bosta.co")
 ))
+
+#Delete Pickup
+apiClient.pickup.delete(delete.DeletePickupRequest(newPickupId))
