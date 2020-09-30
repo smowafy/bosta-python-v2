@@ -82,7 +82,7 @@ class Delivery:
             url = self.apiClient.get_apiBase() + "api/v1/deliveries/awb" 
             params = printAWBRequest.toUrlQueryParamters()
             response = self.apiClient.send('get',url, params=params)
-            if (response.status_code) != 200: return response.text.message
+            if (response.status_code) != 200: return response.text
             return PrintAWBResponse(response.json())
         except Exception as exp:
             logging.error(exp)
