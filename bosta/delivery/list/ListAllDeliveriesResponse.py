@@ -11,11 +11,12 @@ class ListAllDeliveriesResponse:
         Returns: instance from ListAllDeliveriesResponse
 
         """
-        self.deliveries, self.count = self.fromJSONPayload(jsonPayload)
+        self.message, self.success, self.deliveries, self.count = self.fromJSONPayload(jsonPayload)
     
     def fromJSONPayload(self, jsonPayload):
         """ 
-        Extract deliveries and count fields from json response object
+        Extract message, success, deliveries and
+        count fields from json response object
 
         Parameters: 
         jsonResponse (dict): JSON response object 
@@ -25,12 +26,13 @@ class ListAllDeliveriesResponse:
         count (int): Number of deliveries in list
         """  
         try:
-            data = jsonPayload
+            message = jsonPayload.get("message")
+            success = jsonPayload.get("success")
+            count = jsonPayload["data"]["count"]
             deliveries = []
-            for delivery in data["deliveries"]:
+            for delivery in jsonPayload["data"]["deliveries"]:
                 deliveries.append(delivery)
-            count = jsonPayload["count"]
-            return deliveries, count 
+            return message, success, deliveries, count 
         except Exception as exp:
             raise exp
 
