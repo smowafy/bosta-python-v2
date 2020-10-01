@@ -25,7 +25,6 @@ pip install -i https://test.pypi.org/simple/ Bosta
 
 ## Usage
 
-- Environment Variable Config
     ``` python
     import os
 
