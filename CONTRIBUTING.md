@@ -35,7 +35,7 @@ Please update the[docs](README.md) accordingly so that there are no discrepancie
 
 # Developing
 
-- `composer install` install dependencies
+- `python3 setup.py develop` install dependencies
 
 # Releasing
 
@@ -47,9 +47,3 @@ Please update the[docs](README.md) accordingly so that there are no discrepancie
 
 - **Send coherent history ** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please[squash them](http: // www.git - scm.com / book / en / v2 / Git - Tools - Rewriting - History  # Changing-Multiple-Commit-Messages) before submitting.
 
-
-# Running Tests
-
-``` bash
-$ composer test
-```
