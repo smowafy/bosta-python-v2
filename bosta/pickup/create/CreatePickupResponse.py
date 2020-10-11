@@ -24,7 +24,7 @@ class CreatePickupResponse:
         Parameters: 
         jsonResponse (dict): JSON response object 
         """  
-        newPickup = responseObj["message"]
+        newPickup = responseObj["data"]
         self._id = newPickup["_id"]
         self.puid = newPickup["puid"]
         self.business = newPickup["business"]

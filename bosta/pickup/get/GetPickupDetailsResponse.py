@@ -24,7 +24,7 @@ class GetPickupDetailsResponse:
         Parameters: 
         jsonResponse (dict): JSON response object 
         """ 
-        pickup = jsonResponse["message"]
+        pickup = jsonResponse["data"]
         self._id = pickup["_id"]
         self.puid = pickup["puid"]
         self.business = pickup["business"]
