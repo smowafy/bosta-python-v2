@@ -5,22 +5,22 @@ class PrintAWBResponse:
 
         Parameters:
         jsonResponse (dict): JSON response object
-  
-        Returns: instance from PrintAWBResponse 
+
+        Returns: instance from PrintAWBResponse
 
         """
         self.data = self.fromJsonResponse(jsonResponse)
 
     def fromJsonResponse(self, jsonResponse):
-        """ 
+        """
         Extract data field from json response object
 
-        Parameters: 
-        jsonResponse (dict): JSON response object 
-        
-        Returns: 
-        data (str): airway bill data 
-        """  
+        Parameters:
+        jsonResponse (dict): JSON response object
+
+        Returns:
+        data (str): airway bill data
+        """
         return jsonResponse["data"]
 
     def __str__(self):

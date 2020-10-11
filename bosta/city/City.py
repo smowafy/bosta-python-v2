@@ -10,13 +10,14 @@ class City:
         try:
             headers = {
                 "accept": "application/json"
-            } 
+            }
             response = self.apiClient.send(
                 'get',
                 "/cities",
                 headers
             )
-            if (response.status_code != 200): return response.text
+            if (response.status_code != 200):
+                return response.text
             return response.json()
         except Exception as exp:
             raise exp

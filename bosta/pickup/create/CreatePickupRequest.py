@@ -2,13 +2,13 @@ import json
 
 from bosta.utils.ContactPerson import ContactPerson
 
+
 class CreatePickupRequest:
 
     def __init__(self, scheduledDate: str,
-        scheduledTimeSlot: str, contactPerson: ContactPerson,
-        businessId=None, businessLocationId=None,
-        warehouseId=None, noOfPackages=None, notes=None):
-
+                 scheduledTimeSlot: str, contactPerson: ContactPerson,
+                 businessId=None, businessLocationId=None,
+                 warehouseId=None, noOfPackages=None, notes=None):
         """ Initialize new instance from CreatePickupRequest class
 
         Parameters:
@@ -20,10 +20,10 @@ class CreatePickupRequest:
         warehouseId (str)
         noOfPackages (int)
         notes (str)
-  
+
         Returns: instance from CreatePickupRequest
         """
-        
+
         self.businessId = businessId
         self.scheduledDate = scheduledDate
         self.scheduledTimeSlot = scheduledTimeSlot
@@ -32,16 +32,16 @@ class CreatePickupRequest:
         self.noOfPackages = noOfPackages
         self.notes = notes
         self.warehouseId = warehouseId
-    
+
     def toJSONPayload(self):
-        """ 
-        Returns: 
+        """
+        Returns:
         JSON object from current instance
 
-        """ 
+        """
         payload = {
-           "scheduledDate": self.scheduledDate,
-           "scheduledTimeSlot": self.scheduledTimeSlot,
+            "scheduledDate": self.scheduledDate,
+            "scheduledTimeSlot": self.scheduledTimeSlot,
             "contactPerson": self.contactPerson.toJSON(),
         }
         if self.businessId is not None:
@@ -55,7 +55,3 @@ class CreatePickupRequest:
         if self.warehouseId is not None:
             payload['warehouseId'] = self.warehouseId
         return json.dumps(payload)
-
-
-
-

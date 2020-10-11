@@ -3,14 +3,15 @@ import json
 from bosta.utils.Address import Address
 from bosta.utils.Receiver import Receiver
 
+
 class UpdateDeliveryRequest:
     def __init__(
-        self, deliveryId: int ,receiver=None, 
+        self, deliveryId: int, receiver=None,
         pickUpAddress=None, dropOffAddress=None,
-        returnAddress=None,notes=None, 
+        returnAddress=None, notes=None,
         businessReference=None,
         webhookUrl=None, cod=None
-        ):
+    ):
         """ Initialize new instance from UpdateDeliveryRequest class
 
         Parameters:
@@ -37,15 +38,15 @@ class UpdateDeliveryRequest:
         self.webhookUrl = webhookUrl
         self.cod = cod
 
-    def get_deliveryId(self): 
+    def get_deliveryId(self):
         return self._id
 
     def toJSONPayload(self):
-        """ 
-        Returns: 
+        """
+        Returns:
         JSON object from current instance
 
-        """ 
+        """
         payload = {}
         if self.receiver is not None:
             payload['receiver'] = self.receiver.toJSON()
@@ -62,8 +63,5 @@ class UpdateDeliveryRequest:
         if self.webhookUrl is not None:
             payload['webhookUrl'] = self.webhookUrl
         if self.cod is not None:
-            payload['cod'] = self.cod    
+            payload['cod'] = self.cod
         return json.dumps(payload)
-
-
-   

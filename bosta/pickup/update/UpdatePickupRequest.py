@@ -1,11 +1,12 @@
 import json
 
+
 class UpdatePickupRequest:
     def __init__(
-        self, _id, businessId=None, scheduledDate=None,
-        scheduledTimeSlot=None, contactPerson=None,
-        businessLocationId=None, warehouseId=None,
-        noOfPackages=None, notes=None):
+            self, _id, businessId=None, scheduledDate=None,
+            scheduledTimeSlot=None, contactPerson=None,
+            businessLocationId=None, warehouseId=None,
+            noOfPackages=None, notes=None):
         """ Initialize new instance from UpdatePickupRequest class
 
         Parameters:
@@ -19,11 +20,11 @@ class UpdatePickupRequest:
         noOfPackages (str)
         notes (str)
 
-  
+
         Returns: instance from UpdatePickupRequest
 
         """
-        self._id = _id    
+        self._id = _id
         self.businessId = businessId
         self.scheduledDate = scheduledDate
         self.scheduledTimeSlot = scheduledTimeSlot
@@ -35,14 +36,14 @@ class UpdatePickupRequest:
 
     def get_id(self):
         return self._id
-    
+
     def toJSONPayload(self):
-        """ 
-        Returns: 
+        """
+        Returns:
         JSON object from current instance
 
-        """ 
-        payload = {}    
+        """
+        payload = {}
         if self.scheduledDate is not None:
             payload['scheduledDate'] = self.scheduledDate
         if self.scheduledTimeSlot is not None:
@@ -60,5 +61,3 @@ class UpdatePickupRequest:
         if self.warehouseId is not None:
             payload['warehouseId'] = self.warehouseId
         return json.dumps(payload)
-
-

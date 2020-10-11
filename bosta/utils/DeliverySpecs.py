@@ -5,7 +5,7 @@ class DeliverySpecs:
     ):
         """ Initialize new instance from DeliverySpecs class
 
-        Parameters: 
+        Parameters:
         size (float)
         weight (float)
         length (float)
@@ -13,9 +13,9 @@ class DeliverySpecs:
         itemsCount (int)
         description (str)
         document (str)
-        
+
         Returns: New instance from DeliverySpecs class
-        """  
+        """
         self.size = size
         self.weight = weight
         self.packageDetails = {
@@ -28,7 +28,6 @@ class DeliverySpecs:
             "weight": weight,
             "height": height
         }
-
 
     def get_size(self, size):
         return self.size
@@ -43,10 +42,9 @@ class DeliverySpecs:
         return self.dimensions
 
     def __str__(self):
-        return str(self.size,self.weight)
+        return str(self.size, self.weight)
 
 
 if __name__ == '__main__' and __package__ is None:
     from os import sys, path
     sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
-

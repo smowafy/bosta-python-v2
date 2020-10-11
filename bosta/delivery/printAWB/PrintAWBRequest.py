@@ -6,18 +6,19 @@ class PrintAWBRequest:
 
         Parameters:
         deliveryIds (array): List of delivery ids
-  
-        Returns: instance from PrintAWBRequest 
+
+        Returns: instance from PrintAWBRequest
 
         """
         self.ids = deliveryIds
 
     def toUrlQueryParamters(self):
-        """ 
-        Returns: 
+        """
+        Returns:
         JSON object from current instance
 
-        """ 
+        """
         params = {}
-        if len(self.ids) is not 0: params["ids"] = self.ids
+        if len(self.ids) is not 0:
+            params["ids"] = self.ids
         return params

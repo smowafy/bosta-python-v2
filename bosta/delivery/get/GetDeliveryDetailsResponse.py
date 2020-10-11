@@ -5,23 +5,23 @@ class GetDeliveryDetailsResponse:
     def __init__(self, jsonResponse):
         """ Initialize new instance from GetDeliveryDetailsResponse class
 
-        Parameters: 
+        Parameters:
         jsonResponse (dict): JSON Response object
-        
+
         Returns: New instance from GetDeliveryDetailsResponse class
-        """ 
+        """
         self.fromJSONResponse(jsonResponse)
 
     def fromJSONResponse(self, jsonResponse):
-        """ 
+        """
         Extract _id, pickupAddress, dropOffAddress,
         cod, receiver, state, type, creationTimestamp,
         trackingNumber, holder, timeline,
         and history fields from json response object
 
-        Parameters: 
-        jsonResponse (dict): JSON response object 
-        """ 
+        Parameters:
+        jsonResponse (dict): JSON response object
+        """
         self._id = jsonResponse["_id"]
         self.pickupAddress = jsonResponse["pickupAddress"]
         self.dropOffAddress = jsonResponse["dropOffAddress"]

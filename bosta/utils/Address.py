@@ -1,12 +1,12 @@
 class Address:
     def __init__(
-        self, cityCode: str ,firstLine: str, zone=None,
+        self, cityCode: str, firstLine: str, zone=None,
         secondLine=None, district=None, buildingNumber=None,
         floor=None, apartment=None
-        ):
+    ):
         """ Initialize new instance from Address class
 
-        Parameters: 
+        Parameters:
         cityCode (str)
         zone (str)
         secondLine (str)
@@ -14,9 +14,9 @@ class Address:
         buildingNumber (int)
         floor (int)
         apartment (int)
-        
+
         Returns: New instance from Address class
-        """  
+        """
         self.cityCode = cityCode
         self.firstLine = firstLine
         self.zone = zone
@@ -39,23 +39,30 @@ class Address:
         return self.zone
 
     def toJSON(self):
-        """ 
-        Returns: 
+        """
+        Returns:
         JSON object from current instance
 
-        """ 
+        """
         addressObj = {
             "cityCode": self.cityCode,
             "firstLine": self.firstLine
         }
-        if self.zone is not None: addressObj["zone"] = self.zone
-        if self.secondLine is not None: addressObj["secondLine"] = self.secondLine
-        if self.district is not None: addressObj["district"] = self.district
-        if self.buildingNumber is not None: addressObj["buildingNumber"] = self.buildingNumber
-        if self.floor is not None: addressObj["floor"] = self.floor
-        if self.apartment is not None: addressObj["apartment"] = self.apartment
+        if self.zone is not None:
+            addressObj["zone"] = self.zone
+        if self.secondLine is not None:
+            addressObj["secondLine"] = self.secondLine
+        if self.district is not None:
+            addressObj["district"] = self.district
+        if self.buildingNumber is not None:
+            addressObj["buildingNumber"] = self.buildingNumber
+        if self.floor is not None:
+            addressObj["floor"] = self.floor
+        if self.apartment is not None:
+            addressObj["apartment"] = self.apartment
 
         return addressObj
+
 
 if __name__ == '__main__' and __package__ is None:
     from os import sys, path

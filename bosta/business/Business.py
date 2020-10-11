@@ -7,36 +7,37 @@ from bosta.apiClient.ApiClient import ApiClient
 
 class BusinessInfo:
     def __init__(self, apiClient):
-        """ 
+        """
         Initialize new instance from BusinessInfo class
 
-        Parameters: 
+        Parameters:
         apiClient:  ApiClient
 
-        Returns: 
+        Returns:
         BusinessInfo: new instance from BusinessInfo
 
-        """ 
+        """
         self.apiClient = apiClient
-    
+
     def getBusinessSubAccount(self, pageId=0):
-        """ 
+        """
         List all business sub accounts
 
-        Parameters: 
+        Parameters:
         pageId (int, optinal): the sequence of pages
 
-        Returns: 
-        list of all sub accounts 
-        """ 
+        Returns:
+        list of all sub accounts
+        """
         try:
             logging.info('Get Business Sub Account')
-            url  = "/businessSubAccount"
+            url = "/businessSubAccount"
             params = {
-                "pageId": pageId 
+                "pageId": pageId
             }
             response = self.apiClient.send('get', url, params)
-            if (response.status_code != 200): return response.text
+            if (response.status_code != 200):
+                return response.text
             return response.json()
         except Exception as exp:
             logging.error(exp)

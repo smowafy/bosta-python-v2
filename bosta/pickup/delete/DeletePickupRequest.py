@@ -11,5 +11,5 @@ class DeletePickupRequest:
         """
         self._id = pickupId
 
-    def get_pickupId(self): 
+    def get_pickupId(self):
         return self._id
