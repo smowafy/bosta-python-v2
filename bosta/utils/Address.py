@@ -4,6 +4,19 @@ class Address:
         secondLine=None, district=None, buildingNumber=None,
         floor=None, apartment=None
         ):
+        """ Initialize new instance from Address class
+
+        Parameters: 
+        cityCode (str)
+        zone (str)
+        secondLine (str)
+        district (str)
+        buildingNumber (int)
+        floor (int)
+        apartment (int)
+        
+        Returns: New instance from Address class
+        """  
         self.cityCode = cityCode
         self.firstLine = firstLine
         self.zone = zone
@@ -26,6 +39,11 @@ class Address:
         return self.zone
 
     def toJSON(self):
+        """ 
+        Returns: 
+        JSON object from current instance
+
+        """ 
         addressObj = {
             "cityCode": self.cityCode,
             "firstLine": self.firstLine

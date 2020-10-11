@@ -1,5 +1,15 @@
 class Receiver:
     def __init__(self, firstName, lastName, email, phone):
+        """ Initialize new instance from Receiver class
+
+        Parameters: 
+        firstName (str)
+        lastName (str)
+        email (str)
+        phone (str)
+        
+        Returns: New instance from Receiver class
+        """  
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
@@ -18,6 +28,11 @@ class Receiver:
         return self.phone
 
     def toJSON(self):
+        """ 
+        Returns: 
+        JSON object from current instance
+
+        """ 
         return {
             "firstName": self.firstName,
             "lastName": self.lastName,

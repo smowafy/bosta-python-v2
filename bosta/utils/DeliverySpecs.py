@@ -3,6 +3,19 @@ class DeliverySpecs:
         self, size, weight, length, height,
         itemsCount, description, document
     ):
+        """ Initialize new instance from DeliverySpecs class
+
+        Parameters: 
+        size (float)
+        weight (float)
+        length (float)
+        height (float)
+        itemsCount (int)
+        description (str)
+        document (str)
+        
+        Returns: New instance from DeliverySpecs class
+        """  
         self.size = size
         self.weight = weight
         self.packageDetails = {
