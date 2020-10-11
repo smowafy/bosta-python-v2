@@ -21,8 +21,10 @@ class ListAllPickupResponse:
         
         Returns: List of pickups 
        
-        """ 
-        return jsonResponseObj["result"]["pickups"]
+        """
+        if jsonResponseObj.get("result"):
+            return jsonResponseObj["result"]["pickups"]
+        return []
 
     def __str__(self):
         return str(self.pickups)

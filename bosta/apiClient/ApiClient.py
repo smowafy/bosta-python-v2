@@ -56,8 +56,9 @@ class ApiClient:
             """   
             headers['X-Requested-By'] = 'python-sdk'
             headers['Authorization'] = self.apiKey
+            url = self.apiBase + "/api/v1" + url
             return getattr(requests, method)(
-                self.apiBase + "/api/v0" + url , headers=headers, params=params,data=data
+                url , headers=headers, params=params,data=data
             )
         except Exception as exp:
             raise exp
