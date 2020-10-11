@@ -39,7 +39,7 @@ class Delivery:
         """
         try:
             logging.info("list all business deliveries")
-            url = self.apiClient.get_apiBase() + "api/v1/deliveries" 
+            url = "/deliveries" 
             params = listAllDeliveriesRequest.toUrlQueryParamters()
             response = self.apiClient.send('get', url, params = params)
             if (response.status_code) != 200: return response.text
@@ -56,11 +56,11 @@ class Delivery:
         Parameters:
         getDeliveryDetailsRequest (GetDeliveryDetailsRequest)
 
-        Returns: New instance from GetDeliveryDetailsResponse.   
+        Returns: New instance from GetDeliveryDetailsResponse.
         """
         try:
             logging.info('Get Delivery')
-            url = self.apiClient.get_apiBase() + "api/v1/deliveries/" + str(trackDeliveryRequest.get_deliveryId())
+            url = "/deliveries/" + str(getDeliveryDetailsRequest.get_deliveryId())
             response = self.apiClient.send('get',url)
             if (response.status_code) != 200: return response.text
             return GetDeliveryDetailsResponse(response.json())
@@ -79,7 +79,7 @@ class Delivery:
         """
         try:
             logging.info("Print airway bill")
-            url = self.apiClient.get_apiBase() + "api/v1/deliveries/awb" 
+            url = "/deliveries/awb" 
             params = printAWBRequest.toUrlQueryParamters()
             response = self.apiClient.send('get',url, params=params)
             if (response.status_code) != 200: return response.text
@@ -100,7 +100,7 @@ class Delivery:
         try:
             payload = createDeliveryRequest.toJSONPayload()
             logging.info('Create New Delivery: Payload '+ str(payload))
-            url = self.apiClient.get_apiBase() + "api/v1/deliveries"
+            url = "/deliveries"
             headers = {
                 "content-type": "application/json"
             }
@@ -122,7 +122,7 @@ class Delivery:
         """
         try:
             logging.info('Update Delivery')
-            url = self.apiClient.get_apiBase() + "api/v1/deliveries/" + str(updateDeliveryRequest.get_deliveryId())
+            url = "/deliveries/" + str(updateDeliveryRequest.get_deliveryId())
             payload = updateDeliveryRequest.toJSONPayload()
             response = self.apiClient.send('patch',url, data=payload)
             if (response.status_code) != 200: return response.text
@@ -142,7 +142,7 @@ class Delivery:
         """
         try:
             logging.info("Terminate Delivery")
-            url = self.apiClient.get_apiBase() + "api/v0/deliveries/" + str(terminateDeliveryRequest.get_deliveryId())
+            url = "/deliveries/" + str(terminateDeliveryRequest.get_deliveryId())
             response = self.apiClient.send('delete',url)
             if (response.status_code) != 200: return response.text
             return TerminateDeliveryResponse(response.json())
@@ -161,7 +161,7 @@ class Delivery:
         """
         try:
             logging.info('Track Delivery')
-            url = self.apiClient.get_apiBase() + "api/v1/deliveries/" + str(trackDeliveryRequest.get_deliveryId()) + "/state-history"
+            url = "/deliveries/" + str(trackDeliveryRequest.get_deliveryId()) + "/state-history"
             response = self.apiClient.send('get',url)
             if (response.status_code) != 200: return response.text
             return TrackDeliveryResponse(response.json())

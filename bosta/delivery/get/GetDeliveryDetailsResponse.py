@@ -14,25 +14,26 @@ class GetDeliveryDetailsResponse:
 
     def fromJSONResponse(self, jsonResponse):
         """ 
-        Extract _id, puid, business, businessLocationId,
-        scheduledDate, scheduledTimeSlot, contactPerson,
-        createdAt, deliveries, state, and tickets fields from json response object
+        Extract _id, pickupAddress, dropOffAddress,
+        cod, receiver, state, type, creationTimestamp,
+        trackingNumber, holder, timeline,
+        and history fields from json response object
 
         Parameters: 
         jsonResponse (dict): JSON response object 
         """ 
-        pickup = jsonResponse["message"]
-        self._id = pickup["_id"]
-        self.puid = pickup["puid"]
-        self.business = pickup["business"]
-        self.scheduledDate = pickup["scheduledDate"]
-        self.scheduledTimeSlot = pickup["scheduledTimeSlot"]
-        self.contactPerson = pickup["contactPerson"]
-        self.businessLocationId = pickup["businessLocationId"]
-        self.deliveries = pickup["deliveries"]
-        self.state = pickup["state"]
-        self.createdAt = pickup["createdAt"]
-        self.tickets = pickup["tickets"]
-    
+        self._id = jsonResponse["_id"]
+        self.pickupAddress = jsonResponse["pickupAddress"]
+        self.dropOffAddress = jsonResponse["dropOffAddress"]
+        self.cod = jsonResponse["cod"]
+        self.receiver = jsonResponse["receiver"]
+        self.state = jsonResponse["state"]
+        self.type = jsonResponse["type"]
+        self.trackingNumber = jsonResponse["trackingNumber"]
+        self.holder = jsonResponse["holder"]
+        self.timeline = jsonResponse["timeline"]
+        self.history = jsonResponse["history"]
+        self.creationTimestamp = jsonResponse["creationTimestamp"]
+
     def __str__(self):
         str(self._id)

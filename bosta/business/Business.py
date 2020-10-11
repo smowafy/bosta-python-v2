@@ -31,7 +31,7 @@ class BusinessInfo:
         """ 
         try:
             logging.info('Get Business Sub Account')
-            url  = self.apiClient.get_apiBase() + "api/v1/businessSubAccount"
+            url  = "/businessSubAccount"
             params = {
                 "pageId": pageId 
             }

@@ -34,7 +34,7 @@ class Pickup:
         """
         try:
             logging.info("Create New Pickup")
-            url = self.apiClient.get_apiBase() + "api/v1/pickups"
+            url = "/pickups"
             headers = {
                 "content-type": "application/json"
             }
@@ -60,7 +60,7 @@ class Pickup:
         """
         try:
             logging.info("Update Pickup")
-            url = self.apiClient.get_apiBase() + "api/v1/pickups/" + str(updatePickupRequest.get_id())
+            url = "/pickups/" + str(updatePickupRequest.get_id())
             response = self.apiClient.send(
                 'put',
                 url,
@@ -83,7 +83,7 @@ class Pickup:
         Returns: New instance from ListAllPickupResponse.   
         """
         try:
-            url = self.apiClient.apiBase + "api/v0/pickups"
+            url = "/pickups"
             params = listAllPickupsRequest.toQueryParamters()
             response = self.apiClient.send('get',url, params= params)
             if (response.status_code != 200): return response.text
@@ -103,7 +103,7 @@ class Pickup:
         """
         try:
             logging.info("Get Pickup")
-            url = self.apiClient.get_apiBase() + "api/v1/pickups/" + str(getPickupDetailsRequest.get_pickupId())
+            url = "/pickups/" + str(getPickupDetailsRequest.get_pickupId())
             response = self.apiClient.send('get',url)
             if (response.status_code != 200): return response.text
             return GetPickupDetailsResponse(response.json())
@@ -122,7 +122,7 @@ class Pickup:
         """
         try:
             logging.info("Delete Pickup")
-            url = self.apiClient.apiBase + "api/v1/pickups/" + str(deletePickupRequest.get_pickupId())
+            url = "/pickups/" + str(deletePickupRequest.get_pickupId())
             response = self.apiClient.send('delete',url)
             if (response.status_code != 200): return response.text
             return DeletePickupResonse(response.json())

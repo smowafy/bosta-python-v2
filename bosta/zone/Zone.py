@@ -13,7 +13,7 @@ class Zone:
             } 
             response = self.apiClient.send(
                 'get',
-                self.apiClient.get_apiBase() + "api/v0/zones",
+                "/zones",
                 headers
             )
             if (response.status_code != 200): return response.text
