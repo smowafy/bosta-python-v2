@@ -1,26 +1,26 @@
-# bosta
+# Bosta Python SDK
 
-bosta is a Python SDK for integrating with Bosta APIs.
+This repository contains the open source Python SDK for integrating Bosta's APIs into your Python application.
 
 # Table of Contents
 
-- [APIs Documentation](  # apis-documentation)
-- [Installation](  # installation)
-- [Usages](  # usages)
-- [Contribution](  # contribution)
-- [License](  # license)
+- [APIs Documentation](# apis-documentation)
+- [Installation](#installation)
+- [Usages](#usages)
+- [Contribution](#contribution)
+- [License](#license)
 
 # APIs Documentation
 
-- [Staging](https: // stg - app.bosta.co / docs) APIs swagger documentation.
-- [Production](https: // app.bosta.co / docs) APIs swagger documentation.
+- [Staging](https://stg-app.bosta.co/docs) APIs swagger documentation.
+- [Production](https://app.bosta.co/docs) APIs swagger documentation.
 
 # Installation
 
-Use the package manager[pip](https: // pip.pypa.io / en / bosta /) to install bosta.
+You can install the package via [pip](https://pypi.org/project/pip/). Run the following command:
 
 ```bash
-pip install - i https: // test.pypi.org / simple / Bosta
+pip install - i https://pip.pypa.io/en/bosta/
 ```
 
 # Usage
@@ -102,10 +102,13 @@ pip install - i https: // test.pypi.org / simple / Bosta
 
     ```
 
-# Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+## Contribution
 
-Please make sure to update tests as appropriate.
+We are open to, and grateful for, any contributions made by the community.
+By contributing to Bosta, you agree to abide by the code of conduct.
+- [Contributing Guide](CONTRIBUTING.md) 
+- [Code of Conduct](CODE_OF_CONDUCT.md)
 
-# License
-[MIT](https: // github.com / bostaapp / bosta - python / blob / master / LICENSE)
+## License
+
+The MIT License (MIT) [License](LICENSE).
