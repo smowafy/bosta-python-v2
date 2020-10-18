@@ -1,7 +1,7 @@
-from setuptools import setup
+from setuptools import setup, Extension
 
 setup(
-    name='Bosta',
+    name='BostaSDK',
     version='1.0.0',
     author='bosta',
     author_email='sdk@bosta.com',
@@ -10,7 +10,8 @@ setup(
     url='http://pypi.python.org/pypi/bosta/',
     license='LICENSE',
     description='Bosta Python SDK',
-    long_description=open('README.md').read(),
+    long_description=open('README.md', 'r').read(),
+    long_description_content_type='text/markdown',
     install_requires=[
         'requests'
     ],
