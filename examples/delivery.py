@@ -1,8 +1,8 @@
 import os
 
-from bosta.apiClient import ApiClient
-from bosta.delivery import list, create, update, track, printAWB, get, terminate
-from bosta.utils import Receiver, Address, ContactPerson
+from bostaSDK.apiClient import ApiClient
+from bostaSDK.delivery import list, create, update, track, printAWB, get, terminate
+from bostaSDK.utils import Receiver, Address, ContactPerson
 
 apiKey = os.getenv("BOSTA-API-KEY")
 baseUrl = os.getenv("BOSTA-BASE-URL")
