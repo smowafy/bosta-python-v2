@@ -1,6 +1,6 @@
 import json
 
-from bosta.utils.ContactPerson import ContactPerson
+from bostaSDK.utils.ContactPerson import ContactPerson
 
 
 class CreatePickupRequest:

@@ -1,7 +1,7 @@
 import json
 
-from bosta.utils.Address import Address
-from bosta.utils.Receiver import Receiver
+from bostaSDK.utils.Address import Address
+from bostaSDK.utils.Receiver import Receiver
 
 
 class UpdateDeliveryRequest:
