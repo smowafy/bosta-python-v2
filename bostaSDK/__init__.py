@@ -20,7 +20,7 @@ comp.lang.python.
 
 Copyright (C) 2020. All Rights Reserved.
 
-To use, simply 'import bosta'!
+To use, simply 'import bostaSDK'!
 """
 
 from .delivery import *

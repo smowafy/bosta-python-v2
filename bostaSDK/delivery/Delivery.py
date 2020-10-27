@@ -3,9 +3,9 @@ import os
 import json
 import logging
 
-from bosta.utils.Address import Address
-from bosta.utils.Receiver import Receiver
-from bosta.utils.DeliverySpecs import DeliverySpecs
+from bostaSDK.utils.Address import Address
+from bostaSDK.utils.Receiver import Receiver
+from bostaSDK.utils.DeliverySpecs import DeliverySpecs
 
 
 from .list.ListAllDeliveriesRequest import ListAllDeliveriesRequest

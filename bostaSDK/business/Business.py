@@ -2,7 +2,7 @@ import os
 import json
 import logging
 
-from bosta.apiClient.ApiClient import ApiClient
+from bostaSDK.apiClient.ApiClient import ApiClient
 
 
 class BusinessInfo:

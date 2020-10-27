@@ -20,7 +20,7 @@ This repository contains the open source Python SDK for integrating Bosta's APIs
 You can install the package via [pip](https://pypi.org/project/pip/). Run the following command:
 
 ```bash
-pip install - i https://pip.pypa.io/en/bosta/
+pip install BostaSDK
 ```
 
 # Usage
@@ -28,10 +28,10 @@ pip install - i https://pip.pypa.io/en/bosta/
     ``` python
     import os
 
-    from bosta.apiClient import ApiClient
-    from bosta.delivery import list, create, update, track, printAWB, get, terminate
-    from bosta.pickup import create, list, get, update, delete
-    from bosta.utils import Receiver, Address, ContactPerson
+    from bostaSDK.apiClient import ApiClient
+    from bostaSDK.delivery import list, create, update, track, printAWB, get, terminate
+    from bostaSDK.pickup import create, list, get, update, delete
+    from bostaSDK.utils import Receiver, Address, ContactPerson
 
 
     apiKey=os.environ["BOSTA-API-KEY"]="your api key"
