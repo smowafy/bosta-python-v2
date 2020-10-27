@@ -20,7 +20,7 @@ This repository contains the open source Python SDK for integrating Bosta's APIs
 You can install the package via [pip](https://pypi.org/project/pip/). Run the following command:
 
 ```bash
-pip install BostaSDK
+pip install bostaSDK
 ```
 
 # Usage
