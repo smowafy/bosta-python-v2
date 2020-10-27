@@ -7,7 +7,7 @@ setup(
     author_email='sdk@bosta.com',
     scripts=[],
     keywords=["bosta", "client-sdk", "api", "api-integration"],
-    url='http://pypi.python.org/pypi/bosta/',
+    url= 'https://pypi.org/project/BostaSDK/',
     license='LICENSE',
     description='Bosta Python SDK',
     long_description=open('README.md', 'r').read(),
