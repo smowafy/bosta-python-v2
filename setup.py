@@ -1,4 +1,4 @@
-from setuptools import setup, Extension
+from setuptools import setup, Extension, find_packages
 
 setup(
     name='bostaSDK',
@@ -6,6 +6,7 @@ setup(
     author='bosta',
     author_email='sdk@bosta.com',
     scripts=[],
+    packages = find_packages(),
     keywords=["bosta", "client-sdk", "api", "api-integration"],
     url= 'https://pypi.org/project/bostaSDK/',
     license='LICENSE',
