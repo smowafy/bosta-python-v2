@@ -39,8 +39,19 @@ pip install bostaSDK
 
     apiClient=ApiClient(apiKey, baseUrl)
 
-    ################# List Deliveries #################    
-    apiClient.delivery.listAll(list.ListAllDeliveriesRequest(3, 10))
+    ################ Deliveries ################# 
+    ################# List Deliveries ################# 
+    # 1. Create new instance from ListAllDeliveriesRequest
+    #  Parameters:
+    #     pageNumber (int): Page Number
+    #     limit (int): Number of deliveries returned from api
+    listAllDeliveriesRequest = list.ListAllDeliveriesRequest(3, 10) 
+    
+    # 2. Send list all deliveries request
+    #   Parameters:
+    #       listAllDeliveriesRequest (ListAllDeliveriesRequest)
+    apiClient.delivery.listAll(listAllDeliveriesRequest)
+
 
     ################# Create new Delivery #################    
     # 1. Create new Receiver  
@@ -74,10 +85,10 @@ pip install bostaSDK
     #       dropOffAddress (Address)
     #       cashOnDelivery (int): Cash on delivery amount
     #       receiver (Receiver)
-
     createDeliveryReq=create.CreateDeliveryRequest(
         deliveryTypes['SEND']['code'], 100, dropOffAddress, reciever
     )
+
     # 4. Send Create Delivery Request
     #   Parameters:
     #       createDeliveryReq (CreateDeliveryRequest)
@@ -101,7 +112,6 @@ pip install bostaSDK
     # 1. Create new instance from TrackDeliveryRequest
     #   Parameters:
     #       deliveryId (str)
-
     trackDeliveryRequest = track.TrackDeliveryRequest(deliveryId)
 
     # 2. Send track delivery request
@@ -114,7 +124,6 @@ pip install bostaSDK
     # 1. Create new instance from GetDeliveryDetailsRequest
     #   Parameters:
     #       deliveryId (str)
-
     getDeliveryDetailsRequest = get.GetDeliveryDetailsRequest(deliveryId)
     
     # 2. Send get delivery request
@@ -135,7 +144,6 @@ pip install bostaSDK
     #       receiver (Receiver, optinal)
     #       businessReference (str, optinal): Business refrence
     #       webhookUrl (str, optinal)
-
     newReciever=Receiver("user", "test", "test@example.com", "01090055000")
     updateDeliveryRequest = update.UpdateDeliveryRequest(
         deliveryId,
@@ -159,30 +167,96 @@ pip install bostaSDK
     #       terminateDeliveryRequest (TerminateDeliveryRequest)
     apiClient.delivery.terminate(terminateDeliveryRequest)
 
-    # Create New Pickup
-    newPickupId=apiClient.pickup.create(
-        create.CreatePickupRequest(
-        "Mon Nov 7 2021 00:00:00 GMT+0200", apiClient.pickupTimeSlots[0],
-        ContactPerson("userName", "01090000000", "example@bosta.co")
-        )
+
+    ################ Pickups ################# 
+    ################ Create New Pickup #################
+    # 1. Create new instance from ContactPerson
+    #   Parameters:
+    #       name (str)
+    #       phone (str)
+    #       email (str)
+    contactPerson = ContactPerson("userName", "01090000000", "example@bosta.co")
+
+    # 2. Create new instance from CreatePickupRequest
+    #   Parameters:
+    #       scheduledDate (str): Pickup scheduled date
+    #       scheduledTimeSlot (str): "10:00 to 13:00" or "13:00 to 16:00"
+    #       contactPerson (ContactPerson)
+    #       businessId (str)
+    #       businessLocationId (str)
+    #       warehouseId (str)
+    #       noOfPackages (int)
+    #       notes (str) 
+    createPickupRequest = create.CreatePickupRequest(
+        "Mon Nov 7 2021 00:00:00 GMT+0200",
+        apiClient.pickupTimeSlots[0], contactPerson
     )
+    # 3. Send create pickup request
+    #   Parameters:
+    #       createPickupRequest (CreatePickupRequest)
+    newPickupId=apiClient.pickup.create(createPickupRequest)
 
-    # List Pickups
-    apiClient.pickup.listAll(list.ListAllPickupsRequest(2))
 
-    # Get Pickup
-    apiClient.pickup.get(
-        get.GetPickupDetailsRequest(newPickupId)
+    ################ List Pickups #################
+    # 1. Create new instance from ListAllPickupsRequest
+    #   Parameters:
+    #     pageId (int)
+    #     sortBy (str)
+    #     sortValue (str)
+    listAllPickupsRequest = list.ListAllPickupsRequest(2)
+
+    # 2. Send list all pickups request
+    #   Parameters:
+    #       listAllPickupsRequest (ListAllPickupsRequest)
+    apiClient.pickup.listAll(listAllPickupsRequest)
+
+
+    ################ Get Pickup #################
+    # 1. Create new instance from GetPickupDetailsRequest
+    #   Parameters:
+    #     pickupId (str): Pickup Id
+    getPickupDetailsRequest = get.GetPickupDetailsRequest(newPickupId)
+    
+    # 2. Send get pickup request
+    #   Parameters:
+    #       getPickupDetailsRequest (GetPickupDetailsRequest)
+    apiClient.pickup.get(getPickupDetailsRequest)
+
+
+    ################ Update Pickup #################
+    # 1. Create new instance from UpdatePickupRequest
+    #   Parameters:
+    #     _id (str): Pickup Id
+    #     businessId (str)
+    #     scheduledDate (str)
+    #     scheduledTimeSlot (str)
+    #     contactPerson (ContactPerson)
+    #     businessLocationId (str)
+    #     warehouseId (str)
+    #     noOfPackages (str)
+    #     notes (str)
+
+    updatePickupRequest = update.UpdatePickupRequest(
+        newPickupId, 
+        contactPerson=ContactPerson("newUser", "010193155922", "user2@bosta.co")
     )
+      
+    # 2. Send update pickup request
+    #   Parameters:
+    #       updatePickupRequest (UpdatePickupRequest)
+    apiClient.pickup.update(updatePickupRequest)
 
-    # Update Pickup
-    apiClient.pickup.update(update.UpdatePickupRequest(
-        newPickupId, contactPerson=ContactPerson(
-    "newUser", "010193155922", "user2@bosta.co")
-    ))
+    
+    ################ Delete Pickup #################
+    # 1. Create new instance from DeletePickupRequest
+    #   Parameters:
+    #     pickupId (str): Pickup Id
+    deletePickupRequest = delete.DeletePickupRequest(newPickupId)
 
-    # Delete Pickup
-    apiClient.pickup.delete(delete.DeletePickupRequest(newPickupId))
+    # 2. Send delete pickup request
+    #   Parameters:
+    #       deletePickupRequest (UpdatePickupRequest)
+    apiClient.pickup.delete(DeletePickupRequest)
 
     ```
 
