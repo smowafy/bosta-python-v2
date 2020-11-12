@@ -39,41 +39,125 @@ pip install bostaSDK
 
     apiClient=ApiClient(apiKey, baseUrl)
 
-    # List Deliveries
+    ################# List Deliveries #################    
     apiClient.delivery.listAll(list.ListAllDeliveriesRequest(3, 10))
 
-    # Create new delivery
+    ################# Create new Delivery #################    
+    # 1. Create new Receiver  
+    # Parameters:
+    #   firstName (str)
+    #   lastName (str)
+    #   email (str)
+    #   phone (str)
     reciever=Receiver(
     "firstName",
     "lastName",
     "test@example.com",
-     "01090055000")
+     "01090055000"
+    )
+
+    # 2. Create new Address  
+    #   Parameters:
+    #       cityCode (str)
+    #       zone (str)
+    #       secondLine (str)
+    #       district (str)
+    #       buildingNumber (int)
+    #       floor (int)
+    #        apartment (int)
     dropOffAddress=Address("EG-01", "Maadi", "Maadi", "104")
+
+    # 3. Create new instance from CreateDeliveryRequest
+    #    Parameters:
+    #       deliveryType (int)
+    #       specs (DeliverySpecs)
+    #       dropOffAddress (Address)
+    #       cashOnDelivery (int): Cash on delivery amount
+    #       receiver (Receiver)
+
     createDeliveryReq=create.CreateDeliveryRequest(
         deliveryTypes['SEND']['code'], 100, dropOffAddress, reciever
     )
+    # 4. Send Create Delivery Request
+    #   Parameters:
+    #       createDeliveryReq (CreateDeliveryRequest)
+
     deliveryId=apiClient.delivery.create(createDeliveryReq)
 
-    # Print Airway Bill
-    apiClient.delivery.printAirWayBill(printAWB.PrintAWBRequest([deliveryId]))
 
-    # Track Delivery
-    apiClient.delivery.track(track.TrackDeliveryRequest(deliveryId))
+    ################# Print Airway Bill ################# 
+    # 1. Create new instance from PrintAWBRequest
+    #   Parameters:
+    #       deliveryIds (array): List of delivery ids
+    printAWBreq = printAWB.PrintAWBRequest([deliveryId])
 
-    # Get Delivery
-    apiClient.delivery.get(get.GetDeliveryDetailsRequest(deliveryId))
+    # 2. Send Print Airway bill request
+    #   Parameters:
+    #       printAWBreq (PrintAWBRequestrray)
+    apiClient.delivery.printAirWayBill(printAWBreq)
 
-    # Update Delivery
+
+    ################# Track Delivery #################
+    # 1. Create new instance from TrackDeliveryRequest
+    #   Parameters:
+    #       deliveryId (str)
+
+    trackDeliveryRequest = track.TrackDeliveryRequest(deliveryId)
+
+    # 2. Send track delivery request
+    #   Parameters:
+    #       trackDeliveryRequest (TrackDeliveryRequest)
+    apiClient.delivery.track(trackDeliveryRequest)
+
+
+    ################# Get Delivery #################
+    # 1. Create new instance from GetDeliveryDetailsRequest
+    #   Parameters:
+    #       deliveryId (str)
+
+    getDeliveryDetailsRequest = get.GetDeliveryDetailsRequest(deliveryId)
+    
+    # 2. Send get delivery request
+    #   Parameters:
+    #       getDeliveryDetailsRequest (GetDeliveryDetailsRequest)
+    apiClient.delivery.get(getDeliveryDetailsRequest)
+
+
+    ################# Update Delivery #################
+    # 1. Create new instance from UpdateDeliveryRequest
+    #    Parameters:
+    #       deliveryId (str): Delivery Id
+    #       specs (DeliverySpecs)
+    #       pickUpAddress (Address, optinal)
+    #       dropOffAddress (Address, optinal)
+    #       returnAddress (Address, optinal)
+    #       cod (int, optinal): Cash on delivery amount
+    #       receiver (Receiver, optinal)
+    #       businessReference (str, optinal): Business refrence
+    #       webhookUrl (str, optinal)
+
     newReciever=Receiver("user", "test", "test@example.com", "01090055000")
-    apiClient.delivery.update(
-    update.UpdateDeliveryRequest(
+    updateDeliveryRequest = update.UpdateDeliveryRequest(
         deliveryId,
         receiver=newReciever,
-         cod=120))
+         cod=120
+    )
+    # 2. Send update delivery request
+    #   Parameters:
+    #       updateDeliveryRequest (UpdateDeliveryRequest)
+    apiClient.delivery.update(updateDeliveryRequest)
+    
+    
+    #################  Terminate Delivery #################
+    # 1. Create new instance from TerminateDeliveryRequest
+    #   Parameters:
+    #       deliveryId (str)
+    terminateDeliveryRequest = terminate.TerminateDeliveryRequest(deliveryId)
 
-    # Terminate Delivery
-    apiClient.delivery.terminate(
-    terminate.TerminateDeliveryRequest(deliveryId))
+    # 2. Send terminate delivery request
+    #   Parameters:
+    #       terminateDeliveryRequest (TerminateDeliveryRequest)
+    apiClient.delivery.terminate(terminateDeliveryRequest)
 
     # Create New Pickup
     newPickupId=apiClient.pickup.create(
