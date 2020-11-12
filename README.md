@@ -29,8 +29,8 @@ pip install bostaSDK
     import os
 
     from bostaSDK.apiClient import ApiClient
-    from bostaSDK.delivery import list, create, update, track, printAWB, get, terminate
-    from bostaSDK.pickup import create, list, get, update, delete
+    from bostaSDK import delivery
+    from bostaSDK import pickup
     from bostaSDK.utils import Receiver, Address, ContactPerson, DeliveryTypes
 
 
@@ -51,7 +51,7 @@ pip install bostaSDK
     #  Parameters:
     #     pageNumber (int): Page Number
     #     limit (int): Number of deliveries returned from api
-    listAllDeliveriesRequest = list.ListAllDeliveriesRequest(3, 10) 
+    listAllDeliveriesRequest = delivery.list.ListAllDeliveriesRequest(3, 10) 
     
     # 2. Send list all deliveries request
     #   Parameters:
@@ -87,7 +87,7 @@ pip install bostaSDK
     #       dropOffAddress (Address)
     #       cashOnDelivery (int): Cash on delivery amount
     #       receiver (Receiver)
-    createDeliveryReq=create.CreateDeliveryRequest(
+    createDeliveryReq=delivery.create.CreateDeliveryRequest(
         DeliveryTypes.DELIVERY_TYPES['SEND']['code'],
         100, dropOffAddress, reciever
     )
@@ -104,7 +104,7 @@ pip install bostaSDK
     # 1. Create new instance from PrintAWBRequest
     #   Parameters:
     #       deliveryIds (array): List of delivery ids
-    printAWBreq = printAWB.PrintAWBRequest([deliveryId])
+    printAWBreq = delivery.printAWB.PrintAWBRequest([deliveryId])
 
     # 2. Send Print Airway bill request
     #   Parameters:
@@ -116,7 +116,7 @@ pip install bostaSDK
     # 1. Create new instance from TrackDeliveryRequest
     #   Parameters:
     #       deliveryId (str)
-    trackDeliveryRequest = track.TrackDeliveryRequest(deliveryId)
+    trackDeliveryRequest = delivery.track.TrackDeliveryRequest(deliveryId)
 
     # 2. Send track delivery request
     #   Parameters:
@@ -128,7 +128,7 @@ pip install bostaSDK
     # 1. Create new instance from GetDeliveryDetailsRequest
     #   Parameters:
     #       deliveryId (str)
-    getDeliveryDetailsRequest = get.GetDeliveryDetailsRequest(deliveryId)
+    getDeliveryDetailsRequest = delivery.get.GetDeliveryDetailsRequest(deliveryId)
     
     # 2. Send get delivery request
     #   Parameters:
@@ -149,10 +149,10 @@ pip install bostaSDK
     #       businessReference (str, optinal): Business refrence
     #       webhookUrl (str, optinal)
     newReciever=Receiver("user", "test", "test@example.com", "01090055000")
-    updateDeliveryRequest = update.UpdateDeliveryRequest(
+    updateDeliveryRequest = delivery.update.UpdateDeliveryRequest(
         deliveryId,
         receiver=newReciever,
-         cod=120
+        cod=120
     )
     # 2. Send update delivery request
     #   Parameters:
@@ -164,7 +164,7 @@ pip install bostaSDK
     # 1. Create new instance from TerminateDeliveryRequest
     #   Parameters:
     #       deliveryId (str)
-    terminateDeliveryRequest = terminate.TerminateDeliveryRequest(deliveryId)
+    terminateDeliveryRequest = delivery.terminate.TerminateDeliveryRequet(deliveryId)
 
     # 2. Send terminate delivery request
     #   Parameters:
@@ -183,7 +183,8 @@ pip install bostaSDK
 
     # 2. Create new instance from CreatePickupRequest
     #   Parameters:
-    #       scheduledDate (str): Pickup scheduled date
+    #       scheduledDate (str): Pickup scheduled date 
+    #                            "Mon Sep 30 2019 00:00:00 GMT+0200",
     #       scheduledTimeSlot (str): "10:00 to 13:00" or "13:00 to 16:00"
     #       contactPerson (ContactPerson)
     #       businessId (str)
@@ -191,14 +192,16 @@ pip install bostaSDK
     #       warehouseId (str)
     #       noOfPackages (int)
     #       notes (str) 
-    createPickupRequest = create.CreatePickupRequest(
+    createPickupRequest = pickup.create.CreatePickupRequest(
         "Mon Nov 7 2021 00:00:00 GMT+0200",
         apiClient.pickupTimeSlots[0], contactPerson
     )
     # 3. Send create pickup request
     #   Parameters:
     #       createPickupRequest (CreatePickupRequest)
-    newPickupId=apiClient.pickup.create(createPickupRequest)
+    newPickup=apiClient.pickup.create(createPickupRequest)
+    newPickupPuid=newPickup.puid
+    newPickupId=newPickup._id
 
 
     ################ List Pickups #################
@@ -207,25 +210,25 @@ pip install bostaSDK
     #     pageId (int)
     #     sortBy (str)
     #     sortValue (str)
-    listAllPickupsRequest = list.ListAllPickupsRequest(2)
+    listAllPickupsRequest = pickup.list.ListAllPickupsRequest(2)
 
     # 2. Send list all pickups request
     #   Parameters:
     #       listAllPickupsRequest (ListAllPickupsRequest)
-    apiClient.pickup.listAll(listAllPickupsRequest)
-
+    listAllPickupsResponse=apiClient.pickup.listAll(listAllPickupsRequest)
+    listAllPickupsResponse.pickups
 
     ################ Get Pickup #################
     # 1. Create new instance from GetPickupDetailsRequest
     #   Parameters:
     #     pickupId (str): Pickup Id
-    getPickupDetailsRequest = get.GetPickupDetailsRequest(newPickupId)
+    getPickupDetailsRequest = pickup.get.GetPickupDetailsRequest(newPickupId)
     
     # 2. Send get pickup request
     #   Parameters:
     #       getPickupDetailsRequest (GetPickupDetailsRequest)
-    apiClient.pickup.get(getPickupDetailsRequest)
-
+    getPickupDetailsResponse = apiClient.pickup.get(getPickupDetailsRequest)
+    getPickupDetailsResponse.state
 
     ################ Update Pickup #################
     # 1. Create new instance from UpdatePickupRequest
@@ -240,7 +243,7 @@ pip install bostaSDK
     #     noOfPackages (str)
     #     notes (str)
 
-    updatePickupRequest = update.UpdatePickupRequest(
+    updatePickupRequest = pickup.update.UpdatePickupRequest(
         newPickupId, 
         contactPerson=ContactPerson("newUser", "010193155922", "user2@bosta.co")
     )
@@ -255,7 +258,7 @@ pip install bostaSDK
     # 1. Create new instance from DeletePickupRequest
     #   Parameters:
     #     pickupId (str): Pickup Id
-    deletePickupRequest = delete.DeletePickupRequest(newPickupId)
+    deletePickupRequest = pickup.delete.DeletePickupRequest(newPickupId)
 
     # 2. Send delete pickup request
     #   Parameters:
