@@ -27,11 +27,13 @@ class CreateDeliveryResponse:
         trackingNumber (str): Delivery trackingNumber
         message (str): Create delivery response message
         """
-        _id = jsonResponse["_id"]
-        trackingNumber = jsonResponse["trackingNumber"]
-        message = jsonResponse["message"]
+        if jsonResponse.get('data'):
+            _id = jsonResponse["data"]["_id"]
+            trackingNumber = jsonResponse["data"]["trackingNumber"]
+            message = jsonResponse["data"]["message"]
 
-        return _id, trackingNumber, message
+            return _id, trackingNumber, message
+        return str(jsonResponse.message)
 
     def get_deliveryId(self):
         return self._id

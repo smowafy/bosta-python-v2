@@ -111,7 +111,7 @@ class Delivery:
             }
             response = self.apiClient.send(
                 'post', url, headers=headers, data=payload)
-            if (response.status_code) != 201:
+            if (response.status_code) != 201 or (response.status_code) != 200:
                 return response.text
             return CreateDeliveryResponse(response.json())
         except Exception as exp:

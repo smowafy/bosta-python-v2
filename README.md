@@ -31,13 +31,19 @@ pip install bostaSDK
     from bostaSDK.apiClient import ApiClient
     from bostaSDK.delivery import list, create, update, track, printAWB, get, terminate
     from bostaSDK.pickup import create, list, get, update, delete
-    from bostaSDK.utils import Receiver, Address, ContactPerson
+    from bostaSDK.utils import Receiver, Address, ContactPerson, DeliveryTypes
 
 
     apiKey=os.environ["BOSTA-API-KEY"]="your api key"
     baseUrl=os.environ["BOSTA-BASE-URL"]="bosta base url"
 
+
+    ################ ApiClient ################# 
+    # Parameters:
+    #     apiKey (string): Business api key
+    #     apiBase (string): Bosta host url
     apiClient=ApiClient(apiKey, baseUrl)
+
 
     ################ Deliveries ################# 
     ################# List Deliveries ################# 
@@ -50,8 +56,9 @@ pip install bostaSDK
     # 2. Send list all deliveries request
     #   Parameters:
     #       listAllDeliveriesRequest (ListAllDeliveriesRequest)
-    apiClient.delivery.listAll(listAllDeliveriesRequest)
-
+    listAllDeliveriesResponse = apiClient.delivery.listAll(listAllDeliveriesRequest)
+    listAllDeliveriesResponse.count
+    listAllDeliveriesResponse.deliveries
 
     ################# Create new Delivery #################    
     # 1. Create new Receiver  
@@ -60,12 +67,7 @@ pip install bostaSDK
     #   lastName (str)
     #   email (str)
     #   phone (str)
-    reciever=Receiver(
-    "firstName",
-    "lastName",
-    "test@example.com",
-     "01090055000"
-    )
+    reciever=Receiver("firstName", "lastName", "test@example.com", "01090055000")
 
     # 2. Create new Address  
     #   Parameters:
@@ -86,14 +88,16 @@ pip install bostaSDK
     #       cashOnDelivery (int): Cash on delivery amount
     #       receiver (Receiver)
     createDeliveryReq=create.CreateDeliveryRequest(
-        deliveryTypes['SEND']['code'], 100, dropOffAddress, reciever
+        DeliveryTypes.DELIVERY_TYPES['SEND']['code'],
+        100, dropOffAddress, reciever
     )
 
     # 4. Send Create Delivery Request
     #   Parameters:
     #       createDeliveryReq (CreateDeliveryRequest)
 
-    deliveryId=apiClient.delivery.create(createDeliveryReq)
+    createDeliveryResponse=apiClient.delivery.create(createDeliveryReq)
+    deliveryId = createDeliveryResponse.get_deliveryId()
 
 
     ################# Print Airway Bill ################# 
@@ -256,7 +260,7 @@ pip install bostaSDK
     # 2. Send delete pickup request
     #   Parameters:
     #       deletePickupRequest (UpdatePickupRequest)
-    apiClient.pickup.delete(DeletePickupRequest)
+    apiClient.pickup.delete(deletePickupRequest)
 
     ```
 
