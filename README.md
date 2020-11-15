@@ -199,14 +199,15 @@ pip install bostaSDK
     #       noOfPackages (int)
     #       notes (str) 
     createPickupRequest = pickup.create.CreatePickupRequest(
-        "Mon Nov 7 2021 00:00:00 GMT+0200",
+        "Mon Nov 22 2021 00:00:00 GMT+0200",
         apiClient.pickupTimeSlots[0], contactPerson
     )
     # 3. Send create pickup request
     #   Parameters:
     #       createPickupRequest (CreatePickupRequest)
-    newPickup=apiClient.pickup.create(createPickupRequest)
-    newPickupId=newPickup._id
+    createPickupResponse=apiClient.pickup.create(createPickupRequest)
+    createPickupResponse.get_message()
+    newPickupId=createPickupResponse.get_pickupId()
 
 
     ################ List Pickups #################
@@ -256,8 +257,8 @@ pip install bostaSDK
     # 2. Send update pickup request
     #   Parameters:
     #       updatePickupRequest (UpdatePickupRequest)
-    apiClient.pickup.update(updatePickupRequest)
-
+    updatePickupResponse =apiClient.pickup.update(updatePickupRequest)
+    updatePickupResponse.get_message()
     
     ################ Delete Pickup #################
     # 1. Create new instance from DeletePickupRequest
