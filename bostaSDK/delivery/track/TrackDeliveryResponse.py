@@ -20,6 +20,8 @@ class TrackDeliveryResponse:
         res (dict, str): JSON response object or response text message
         """
         if type(res) is dict and res.get("data") is not None:
+            self.message = res["message"]
+            self.success = res["success"]
             self.state_history = []
             for obj in res["data"]["state-history"]:
                 self.state_history.append({
@@ -27,10 +29,15 @@ class TrackDeliveryResponse:
                     "time": obj["timestamp"],
                     "takenBy": obj["takenBy"]["userName"]
                 })
-            self._id = res["_id"]
-            self.trackingNumber = res["trackingNumber"]
+            self._id = res["data"]["_id"]
+            self.trackingNumber = res["data"]["trackingNumber"]
         else:
             self.message = str(res)
 
     def __str__(self):
         return str(self._id) or self.message
+    def get_message(self):
+        return self.message 
+    def get_state_history(self):
+        return self.state_history or None
+
