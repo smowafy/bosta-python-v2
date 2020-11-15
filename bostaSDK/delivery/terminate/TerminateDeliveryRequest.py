@@ -5,7 +5,7 @@ class TerminateDeliveryRequest:
         """ Initialize new instance from TerminateDeliveryRequest class
 
         Parameters:
-        deliveryId (Array): List of terminated deliveries ids
+        deliveryId (str): Delivery Id
 
         Returns: New instance from TerminateDeliveryRequest class
         """
