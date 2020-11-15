@@ -41,7 +41,7 @@ class Pickup:
             response = self.apiClient.send(
                 'post', url, headers=headers, data=createPickupRequest.toJSONPayload())
             if (response.status_code != 200):
-                return response.text
+                return CreatePickupResponse(response.text)
             return CreatePickupResponse(response.json())
         except Exception as exp:
             logging.error(exp)
@@ -65,7 +65,7 @@ class Pickup:
                 data=updatePickupRequest.toJSONPayload()
             )
             if (response.status_code != 200):
-                return response.text
+                return UpdatePickupResponse(response.text)
             return UpdatePickupResponse(response.json())
         except Exception as exp:
             logging.error(exp)
@@ -85,7 +85,7 @@ class Pickup:
             params = listAllPickupsRequest.toQueryParamters()
             response = self.apiClient.send('get', url, params=params)
             if (response.status_code != 200):
-                return response.text
+                return ListAllPickupResponse(response.text)
             return ListAllPickupResponse(response.json())
         except Exception as exp:
             logging.error(exp)
@@ -105,7 +105,7 @@ class Pickup:
             url = "/pickups/" + str(getPickupDetailsRequest.get_pickupId())
             response = self.apiClient.send('get', url)
             if (response.status_code != 200):
-                return response.text
+                return GetPickupDetailsResponse(response.text)
             return GetPickupDetailsResponse(response.json())
         except Exception as exp:
             logging.error(exp)
@@ -125,7 +125,7 @@ class Pickup:
             url = "/pickups/" + str(deletePickupRequest.get_pickupId())
             response = self.apiClient.send('delete', url)
             if (response.status_code != 200):
-                return response.text
+                return DeletePickupResonse(response.text)
             return DeletePickupResonse(response.json())
         except Exception as exp:
             logging.error(exp)

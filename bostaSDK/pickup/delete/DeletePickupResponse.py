@@ -12,7 +12,7 @@ class DeletePickupResonse:
         instance from DeletePickupResonse
 
         """
-        self.message = self.fromJsonResponse(jsonResponse)
+        self.fromJsonResponse(jsonResponse)
 
     def fromJsonResponse(self, jsonResponse):
         """
@@ -20,11 +20,11 @@ class DeletePickupResonse:
 
         Parameters:
         jsonResponse (dict): JSON response object
-
-        Returns: Delete pickup response message
-
         """
-        return jsonResponse["message"]
+        if jsonResponse.get("message") is not None:
+            self.message = jsonResponse["message"]
+        else:
+            self.message = str(jsonResponse )
 
     def __str__(self):
         self.message

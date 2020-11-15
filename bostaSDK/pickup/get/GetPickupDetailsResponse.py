@@ -24,18 +24,22 @@ class GetPickupDetailsResponse:
         Parameters:
         jsonResponse (dict): JSON response object
         """
-        pickup = jsonResponse["data"]
-        self._id = pickup["_id"]
-        self.puid = pickup["puid"]
-        self.business = pickup["business"]
-        self.scheduledDate = pickup["scheduledDate"]
-        self.scheduledTimeSlot = pickup["scheduledTimeSlot"]
-        self.contactPerson = pickup["contactPerson"]
-        self.businessLocationId = pickup["businessLocationId"]
-        self.deliveries = pickup["deliveries"]
-        self.state = pickup["state"]
-        self.createdAt = pickup["createdAt"]
-        self.tickets = pickup["tickets"]
+        if jsonResponse.get("data") is not None:
+
+            pickup = jsonResponse["data"]
+            self._id = pickup["_id"]
+            self.puid = pickup["puid"]
+            self.business = pickup["business"]
+            self.scheduledDate = pickup["scheduledDate"]
+            self.scheduledTimeSlot = pickup["scheduledTimeSlot"]
+            self.contactPerson = pickup["contactPerson"]
+            self.businessLocationId = pickup["businessLocationId"]
+            self.deliveries = pickup["deliveries"]
+            self.state = pickup["state"]
+            self.createdAt = pickup["createdAt"]
+            self.tickets = pickup["tickets"]
+        else:
+            self.message = str(jsonResponse)
 
     def __str__(self):
-        return self._id
+        return self._id or self.message

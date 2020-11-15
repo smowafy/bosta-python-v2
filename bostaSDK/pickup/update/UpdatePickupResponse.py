@@ -12,7 +12,7 @@ class UpdatePickupResponse:
         instance from UpdatePickupResponse
 
         """
-        self.message = self.fromJSONResponse(jsonResponse)
+        self.fromJSONResponse(jsonResponse)
 
     def fromJSONResponse(self, jsonResponse):
         """
@@ -20,11 +20,11 @@ class UpdatePickupResponse:
 
         Parameters:
         jsonResponse (dict): JSON response object
-
-        Returns:
-        message (str): Update Pickup response message
         """
-        return jsonResponse["message"]
+        if jsonResponse.get('message') is not None:
+            self.message= jsonResponse["message"]
+        else:
+            self.message = str(jsonResponse)
 
     def __str__(self):
         return self.message

@@ -24,16 +24,20 @@ class CreatePickupResponse:
         Parameters:
         jsonResponse (dict): JSON response object
         """
-        newPickup = responseObj["data"]
-        self._id = newPickup["_id"]
-        self.puid = newPickup["puid"]
-        self.business = newPickup["business"]
-        self.businessLocationId = newPickup["businessLocationId"]
-        self.scheduledDate = newPickup["scheduledDate"]
-        self.scheduledTimeSlot = newPickup["scheduledTimeSlot"]
-        self.contactPerson = newPickup["contactPerson"]
-        self.createdAt = newPickup["createdAt"]
-        self.updatedAt = newPickup["updatedAt"]
+        if responseObj.get('data') is not None:
+            newPickup = responseObj["data"]
+            self._id = newPickup["_id"]
+            self.puid = newPickup["puid"]
+            self.business = newPickup["business"]
+            self.businessLocationId = newPickup["businessLocationId"]
+            self.scheduledDate = newPickup["scheduledDate"]
+            self.scheduledTimeSlot = newPickup["scheduledTimeSlot"]
+            self.contactPerson = newPickup["contactPerson"]
+            self.createdAt = newPickup["createdAt"]
+            self.updatedAt = newPickup["updatedAt"]
+        else:
+            self.message = str(responseObj)
 
     def __str__(self):
-        return self._id
+        return self._id or self.message
+    

@@ -10,7 +10,7 @@ class ListAllPickupResponse:
         Returns: instance from ListAllPickupResponse
 
         """
-        self.pickups = self.fromJSONPayload(jsonResponseObj)
+        self.fromJSONPayload(jsonResponseObj)
 
     def fromJSONPayload(self, jsonResponseObj):
         """
@@ -19,12 +19,20 @@ class ListAllPickupResponse:
         Parameters:
         jsonResponse (dict): JSON response object
 
-        Returns: List of pickups
-
         """
-        if jsonResponseObj.get("result"):
-            return jsonResponseObj["result"]["pickups"]
-        return []
+        if jsonResponseObj.get("data"):
+            self.pickups = jsonResponseObj["data"]["pickups"]
+            self.message = jsonResponseObj["message"]
+            self.success = jsonResponseObj["success"]
+        else:
+            self.pickups = []
+            self.message = str(jsonResponseObj)
 
     def __str__(self):
-        return str(self.pickups)
+        return self.message
+    
+    def get_pickups(self):
+        return self.pickups
+
+    def get_message(self):
+        return self.message
