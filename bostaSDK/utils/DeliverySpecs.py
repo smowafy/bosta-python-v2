@@ -1,12 +1,12 @@
 class DeliverySpecs:
     def __init__(
-        self, size, weight, length, height,
-        itemsCount, description, document
+        self, size: str, weight=None, length=None, height=None,
+        itemsCount=None, description=None, document=None
     ):
         """ Initialize new instance from DeliverySpecs class
 
         Parameters:
-        size (float)
+        size (str)
         weight (float)
         length (float)
         height (float)
@@ -40,6 +40,23 @@ class DeliverySpecs:
 
     def get_dimensions(self, dimensions):
         return self.dimensions
+
+    def toJSON(self):
+        """
+        Returns:
+        JSON object from current instance
+
+        """
+        specs = { 
+            "size": self.size
+            }
+        if self.weight is not None:
+            specs['weight'] = self.weight
+        if self.packageDetails['itemsCount'] is not None:
+            specs['packageDetails'] = self.packageDetails
+        if self.dimensions['length'] is not None:
+            specs['dimensions'] = self.dimensions
+        return specs
 
     def __str__(self):
         return str(self.size, self.weight)

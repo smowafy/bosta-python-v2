@@ -83,10 +83,14 @@ pip install bostaSDK
     # 3. Create new instance from CreateDeliveryRequest
     #    Parameters:
     #       deliveryType (int)
-    #       specs (DeliverySpecs)
+    #       cod (int): Cash on delivery amount
     #       dropOffAddress (Address)
     #       cashOnDelivery (int): Cash on delivery amount
     #       receiver (Receiver)
+    #       deliverySpecs (DeliverySpecs)
+    #       notes (str)
+    #       businessReference (str)
+
     createDeliveryReq=delivery.create.CreateDeliveryRequest(
         DeliveryTypes.DELIVERY_TYPES['SEND']['code'],
         100, dropOffAddress, reciever

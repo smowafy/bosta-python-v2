@@ -7,16 +7,23 @@ from bostaSDK.utils.DeliverySpecs import DeliverySpecs
 
 class CreateDeliveryRequest:
 
-    def __init__(self, deliveryType, cod, dropOffAddress: Address, receiver: Receiver):
+    def __init__(
+        self, deliveryType, cod,
+        dropOffAddress: Address, receiver: Receiver,
+        deliverySpecs=None, notes=None,
+        businessReference=None,
+        ):
         """ Initialize new instance from CreateDeliveryRequest class
 
         Parameters:
         deliveryType (int)
-        specs (DeliverySpecs)
+        cod (int): Cash on delivery amount
         dropOffAddress (Address)
         cashOnDelivery (int): Cash on delivery amount
         receiver (Receiver)
-
+        deliverySpecs (DeliverySpecs)
+        notes (str)
+        businessReference (str)
 
         Returns: instance from CreateDeliveryRequest
 
