@@ -163,8 +163,8 @@ pip install bostaSDK
     # 2. Send update delivery request
     #   Parameters:
     #       updateDeliveryRequest (UpdateDeliveryRequest)
-    apiClient.delivery.update(updateDeliveryRequest)
-    
+    updateDeliveryResponse = apiClient.delivery.update(updateDeliveryRequest)
+    updateDeliveryResponse.get_message()
     
     #################  Terminate Delivery #################
     # 1. Create new instance from TerminateDeliveryRequest
