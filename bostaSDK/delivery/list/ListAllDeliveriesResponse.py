@@ -29,7 +29,7 @@ class ListAllDeliveriesResponse:
         success (boolean) 
         """
         try:
-            if res.get('data') is not None:
+            if type(res) is dict and res.get('data') is not None:
                 self.message = res.get("message")
                 self.success = res.get("success")
                 self.count = res["data"]["count"]

@@ -24,7 +24,7 @@ class GetPickupDetailsResponse:
         Parameters:
         res (dict, str): JSON response object or response text message
         """
-        if res.get("data") is not None:
+        if type(res) is dict and res.get("data") is not None:
 
             pickup = res["data"]
             self._id = pickup["_id"]

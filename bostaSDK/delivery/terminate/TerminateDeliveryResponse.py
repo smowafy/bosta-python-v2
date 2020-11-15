@@ -18,7 +18,7 @@ class TerminateDeliveryResponse:
         Parameters:
         res (dict, str): JSON response object or response text message
         """
-        if res.get("message") is not None:
+        if type(res) is dict and res.get("message") is not None:
             self.message = res["message"]
         else:
             self.message = str(res)

@@ -21,7 +21,7 @@ class UpdateDeliveryResponse:
         Parameters:
         res (dict, str): JSON response object or response text message
         """
-        if res.get("_id") is not None:
+        if type(res) is dict and res.get("_id") is not None:
             self.message = res["message"]
             self._id = res["_id"]
         else:

@@ -18,7 +18,7 @@ class PrintAWBResponse:
         Parameters:
         res (dict, str): JSON response object or response text message
         """
-        if res.get("data") is not None:
+        if type(res) is dict and res.get("data") is not None:
             self.data = res["data"]
             self.message = res.get("message")
         else:

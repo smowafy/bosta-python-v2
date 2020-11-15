@@ -20,7 +20,7 @@ class ListAllPickupResponse:
         res (dict, str): JSON response object or response text message
 
         """
-        if res.get("data"):
+        if type(res) is dict and res.get("data") is not None:
             self.pickups = res["data"]["pickups"]
             self.message = res["message"]
             self.success = res["success"]

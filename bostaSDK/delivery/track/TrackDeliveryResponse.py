@@ -19,7 +19,7 @@ class TrackDeliveryResponse:
         Parameters:
         res (dict, str): JSON response object or response text message
         """
-        if res.get("state-history") is not None:
+        if type(res) is dict and res.get("state-history") is not None:
             self.state_history = []
             for obj in res["state-history"]:
                 self.state_history.append({

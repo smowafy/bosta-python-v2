@@ -1,40 +1,38 @@
 
 
 class CreateDeliveryResponse:
-    def __init__(self, jsonResponse):
+    def __init__(self, res):
         """
         Initialize new instance from CreateDeliveryResponse class
 
         Parameters:
-        jsonResponse (dict): JSON response object
+        res (dict): JSON response object or response text message
 
         Returns:
         instance from CreateDeliveryResponse
 
         """
-        self._id, self.trackingNumber, self.message = self.fromJSONPayload(
-            jsonResponse)
+        self.fromResponseObj(res)
 
-    def fromJSONPayload(self, jsonResponse):
+    def fromResponseObj(self, res):
         """
         Extract _id, trackingNumber and message fields from json response object
 
         Parameters:
-        jsonResponse (dict): JSON response object
+        res (dict): JSON response object or response text message
 
         Returns:
         _id (str): Delivery Id
         trackingNumber (str): Delivery trackingNumber
         message (str): Create delivery response message
         """
-        if jsonResponse.get('data'):
-            _id = jsonResponse["data"]["_id"]
-            trackingNumber = jsonResponse["data"]["trackingNumber"]
-            message = jsonResponse["data"]["message"]
+        if type(res) is dict and res.get('data') is not None:
+            self._id = res["data"]["_id"]
+            self.trackingNumber = res["data"]["trackingNumber"]
+            self.message = res["data"]["message"]
         else:
-            self.message = str(jsonResponse)
+            self.message = str(res)
             self._id = self.trackingNumber = None
-        return _id, trackingNumber, message
 
 
     def get_deliveryId(self):
@@ -47,4 +45,4 @@ class CreateDeliveryResponse:
         return self.message
 
     def __str__(self):
-        return self._id
+        return self.message
