@@ -83,9 +83,8 @@ class Delivery:
         """
         try:
             logging.info("Print airway bill")
-            url = "/deliveries/awb"
-            params = printAWBRequest.toUrlQueryParamters()
-            response = self.apiClient.send('get', url, params=params)
+            url = "/deliveries/awb" +  str(printAWBRequest.get_deliveryId())
+            response = self.apiClient.send('get', url)
             if (response.status_code) != 200:
                 return response.text
             return PrintAWBResponse(response.json())
@@ -172,7 +171,7 @@ class Delivery:
         try:
             logging.info('Track Delivery')
             url = "/deliveries/" + \
-                str(trackDeliveryRequest.get_deliveryId()) + "/state-history"
+                str(trackDeliveryRequest.get_deliveryId()) + "/tracking"
             response = self.apiClient.send('get', url)
             if (response.status_code) != 200:
                 return response.text

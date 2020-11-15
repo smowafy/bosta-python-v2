@@ -1,24 +1,19 @@
 
 
 class PrintAWBRequest:
-    def __init__(self, deliveryIds=[]):
+    def __init__(self, deliveryId):
         """ Initialize new instance from PrintAWBRequest class
 
         Parameters:
-        deliveryIds (array): List of delivery ids
+        deliveryId (str): Delivery Id
 
         Returns: instance from PrintAWBRequest
 
         """
-        self.ids = deliveryIds
+        self._id = deliveryId
 
-    def toUrlQueryParamters(self):
-        """
-        Returns:
-        JSON object from current instance
+    def __str__(self):
+        return str(self._id)
 
-        """
-        params = {}
-        if len(self.ids) is not 0:
-            params["ids"] = self.ids
-        return params
+    def get_deliveryId(self):
+        return self._id
