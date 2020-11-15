@@ -206,7 +206,6 @@ pip install bostaSDK
     #   Parameters:
     #       createPickupRequest (CreatePickupRequest)
     newPickup=apiClient.pickup.create(createPickupRequest)
-    newPickupPuid=newPickup.puid
     newPickupId=newPickup._id
 
 

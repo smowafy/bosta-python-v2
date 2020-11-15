@@ -25,6 +25,7 @@ class CreatePickupResponse:
         res (dict, str): JSON response object or response text message
         """
         if type(res) is dict and res.get('data') is not None:
+            self.message = res.get("message")
             newPickup = res["data"]
             self._id = newPickup["_id"]
             self.puid = newPickup["puid"]
@@ -39,5 +40,8 @@ class CreatePickupResponse:
             self.message = str(res)
 
     def __str__(self):
-        return self._id or self.message
+        return self.message
+    
+    def get_pickupId(self):
+        return self._id
     
