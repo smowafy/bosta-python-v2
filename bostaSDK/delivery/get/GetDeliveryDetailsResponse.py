@@ -23,20 +23,26 @@ class GetDeliveryDetailsResponse:
         jsonResponse (dict): JSON response object
         """
         if type(res) is dict and res.get('data') is not None:
-            self._id = res["_id"]
-            self.pickupAddress = res["pickupAddress"]
-            self.dropOffAddress = res["dropOffAddress"]
-            self.cod = res["cod"]
-            self.receiver = res["receiver"]
-            self.state = res["state"]
-            self.type = res["type"]
-            self.trackingNumber = res["trackingNumber"]
-            self.holder = res["holder"]
-            self.timeline = res["timeline"]
-            self.history = res["history"]
-            self.creationTimestamp = res["creationTimestamp"]
+            self.message = res.get("message")
+            data = res["data"]
+            self._id = data["_id"]
+            self.pickupAddress = data["pickupAddress"]
+            self.dropOffAddress = data["dropOffAddress"]
+            self.cod = data["cod"]
+            self.receiver = data["receiver"]
+            self.state = data["state"]
+            self.type = data["type"]
+            self.trackingNumber = data["trackingNumber"]
+            self.holder = data["holder"]
+            self.timeline = data["timeline"]
+            self.history = data["history"]
+            self.creationTimestamp = data["creationTimestamp"]
         else:
             self.message = str(res)
 
     def __str__(self):
-        return str(self._id) or self.message
+        return self.message
+    def get_message(self):
+        return self.message
+    def get_deliveryId(self):
+        return self._id

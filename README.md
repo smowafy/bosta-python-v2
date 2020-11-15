@@ -127,6 +127,7 @@ pip install bostaSDK
     #   Parameters:
     #       trackDeliveryRequest (TrackDeliveryRequest)
     trackDeliveryResponse = apiClient.delivery.track(trackDeliveryRequest)
+    trackDeliveryResponse.get_message()
 
 
     ################# Get Delivery #################
@@ -138,8 +139,8 @@ pip install bostaSDK
     # 2. Send get delivery request
     #   Parameters:
     #       getDeliveryDetailsRequest (GetDeliveryDetailsRequest)
-    apiClient.delivery.get(getDeliveryDetailsRequest)
-
+    getDeliveryDetailsResponse = apiClient.delivery.get(getDeliveryDetailsRequest)
+    getDeliveryDetailsResponse.get_message()
 
     ################# Update Delivery #################
     # 1. Create new instance from UpdateDeliveryRequest
