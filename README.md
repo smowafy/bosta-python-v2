@@ -113,7 +113,8 @@ pip install bostaSDK
     # 2. Send Print Airway bill request
     #   Parameters:
     #       printAWBreq (PrintAWBRequestrray)
-    apiClient.delivery.printAirWayBill(printAWBreq)
+    printAirWayBillResponse = apiClient.delivery.printAirWayBill(printAWBreq)
+    printAirWayBillResponse.get_data()
 
 
     ################# Track Delivery #################
@@ -125,7 +126,7 @@ pip install bostaSDK
     # 2. Send track delivery request
     #   Parameters:
     #       trackDeliveryRequest (TrackDeliveryRequest)
-    apiClient.delivery.track(trackDeliveryRequest)
+    trackDeliveryResponse = apiClient.delivery.track(trackDeliveryRequest)
 
 
     ################# Get Delivery #################
