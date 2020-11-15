@@ -1,27 +1,32 @@
 
 class PrintAWBResponse:
-    def __init__(self, jsonResponse):
+    def __init__(self, res):
         """ Initialize new instance from PrintAWBResponse class
 
         Parameters:
-        jsonResponse (dict): JSON response object
+        res (dict, str): JSON response object or response text message
 
         Returns: instance from PrintAWBResponse
 
         """
-        self.data = self.fromJsonResponse(jsonResponse)
+        self.fromResponseObj(res)
 
-    def fromJsonResponse(self, jsonResponse):
+    def fromResponseObj(self, res):
         """
         Extract data field from json response object
 
         Parameters:
-        jsonResponse (dict): JSON response object
-
-        Returns:
-        data (str): airway bill data
+        res (dict, str): JSON response object or response text message
         """
-        return jsonResponse["data"]
+        if res.get("data") is not None:
+            self.data = res["data"]
+            self.message = res.get("message")
+        else:
+            self.message = str(res)
+            self.data = None
 
     def __str__(self):
+        return self.message
+    
+    def get_data(self):
         return self.data

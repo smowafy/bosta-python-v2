@@ -3,38 +3,45 @@ import logging
 
 
 class ListAllDeliveriesResponse:
-    def __init__(self, jsonPayload):
+    def __init__(self, res):
         """ Initialize new instance from ListAllDeliveriesResponse class
 
         Parameters:
-        jsonPayload (dict): JSON response object
+        res (dict): JSON response object or response text message
 
         Returns: instance from ListAllDeliveriesResponse
 
         """
-        self.message, self.success, self.deliveries, self.count = self.fromJSONPayload(
-            jsonPayload)
+        self.fromResponseObj(res)
 
-    def fromJSONPayload(self, jsonPayload):
+    def fromResponseObj(self, res):
         """
         Extract message, success, deliveries and
         count fields from json response object
 
         Parameters:
-        jsonResponse (dict): JSON response object
+        res (dict, str): JSON response object or response text message
 
         Returns:
         deliveries (array): List of deliveries
         count (int): Number of deliveries in list
+        message (str): response message
+        success (boolean) 
         """
         try:
-            message = jsonPayload.get("message")
-            success = jsonPayload.get("success")
-            count = jsonPayload["data"]["count"]
-            deliveries = []
-            for delivery in jsonPayload["data"]["deliveries"]:
-                deliveries.append(delivery)
-            return message, success, deliveries, count
+            if res.get('data') is not None:
+                self.message = res.get("message")
+                self.success = res.get("success")
+                self.count = res["data"]["count"]
+                self.deliveries = []
+                for delivery in res["data"]["deliveries"]:
+                    self.deliveries.append(delivery)
+            else:
+                self.message = str(res)
+                self.count = 0
+                self.success = False
+                self.deliveries = []
+
         except Exception as exp:
             raise exp
 
@@ -43,3 +50,5 @@ class ListAllDeliveriesResponse:
 
     def get_count(self):
         return self.count
+    def get_message(self):
+        return self.message

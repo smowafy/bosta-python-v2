@@ -2,37 +2,35 @@
 
 class TrackDeliveryResponse:
 
-    def __init__(self, jsonResponse):
+    def __init__(self, res):
         """ Initialize new instance from TrackDeliveryResponse class
 
         Parameters:
-        jsonResponse (dict): JSON Response object
+        res (dict, str): JSON Response object or response text message
 
         Returns: New instance from TrackDeliveryResponse class
         """
-        self._id, self.trackingNumber, self.state_history = self.fromJSONResponse(
-            jsonResponse)
+        self.fromResponseObj(res)
 
-    def fromJSONResponse(self, jsonResponse):
+    def fromResponseObj(self, res):
         """
         Extract message field from json response object
 
         Parameters:
-        jsonResponse (dict): JSON response object
-
-        Returns:
-        id (str): Delivery Id
-        trackingNumber (str): Delivery tracking number
-        state_history (array): List of delivery states
+        res (dict, str): JSON response object or response text message
         """
-        state_history = []
-        for obj in jsonResponse["state-history"]:
-            state_history.append({
-                "state": obj["state"],
-                "time": obj["timestamp"],
-                "takenBy": obj["takenBy"]["userName"]
-            })
-        return jsonResponse["_id"], jsonResponse["trackingNumber"], state_history
+        if res.get("state-history") is not None:
+            self.state_history = []
+            for obj in res["state-history"]:
+                self.state_history.append({
+                    "state": obj["state"],
+                    "time": obj["timestamp"],
+                    "takenBy": obj["takenBy"]["userName"]
+                })
+            self._id = res["_id"]
+            self.trackingNumber = res["trackingNumber"]
+        else:
+            self.message = str(res)
 
     def __str__(self):
-        str(self._id)
+        return str(self._id) or self.message
