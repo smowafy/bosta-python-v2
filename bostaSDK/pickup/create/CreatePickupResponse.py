@@ -2,30 +2,30 @@
 
 class CreatePickupResponse:
 
-    def __init__(self, jsonResponseObj):
+    def __init__(self, res):
         """
         Initialize new instance from CreatePickupResponse class
 
         Parameters:
-        jsonResponse (dict): JSON response object
+        res (dict, str): JSON response object or response text message
 
         Returns:
         instance from CreatePickupResponse
 
         """
-        self.fromJSONPayload(jsonResponseObj)
+        self.fromResponseObj(res)
 
-    def fromJSONPayload(self, responseObj):
+    def fromResponseObj(self, res):
         """
         Extract _id, puid, business, businessLocationId,
         scheduledDate, scheduledTimeSlot, contactPerson,
         createdAt and updatedAt fields from json response object
 
         Parameters:
-        jsonResponse (dict): JSON response object
+        res (dict, str): JSON response object or response text message
         """
-        if responseObj.get('data') is not None:
-            newPickup = responseObj["data"]
+        if res.get('data') is not None:
+            newPickup = res["data"]
             self._id = newPickup["_id"]
             self.puid = newPickup["puid"]
             self.business = newPickup["business"]
@@ -36,7 +36,7 @@ class CreatePickupResponse:
             self.createdAt = newPickup["createdAt"]
             self.updatedAt = newPickup["updatedAt"]
         else:
-            self.message = str(responseObj)
+            self.message = str(res)
 
     def __str__(self):
         return self._id or self.message

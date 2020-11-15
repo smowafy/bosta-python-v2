@@ -1,30 +1,30 @@
 
 
 class DeletePickupResonse:
-    def __init__(self, jsonResponse):
+    def __init__(self, res):
         """
         Initialize new instance from DeletePickupResonse class
 
         Parameters:
-        jsonResponse (dict): JSON response object
+        res (dict): JSON response object or response text message
 
         Returns:
         instance from DeletePickupResonse
 
         """
-        self.fromJsonResponse(jsonResponse)
+        self.fromResponseObj(res)
 
-    def fromJsonResponse(self, jsonResponse):
+    def fromResponseObj(self, res):
         """
         Extract message field from json response object
 
         Parameters:
-        jsonResponse (dict): JSON response object
+        res (dict, str): JSON response object or response text message
         """
-        if jsonResponse.get("message") is not None:
-            self.message = jsonResponse["message"]
+        if res.get("message") is not None:
+            self.message = res["message"]
         else:
-            self.message = str(jsonResponse )
+            self.message = str(res )
 
     def __str__(self):
         self.message

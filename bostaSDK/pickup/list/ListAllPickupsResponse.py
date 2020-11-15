@@ -1,32 +1,32 @@
 
 
 class ListAllPickupResponse:
-    def __init__(self, jsonResponseObj):
+    def __init__(self, res):
         """ Initialize new instance from ListAllPickupResponse class
 
         Parameters:
-        jsonPayload (dict): JSON response object
+        res (dict, str): JSON response object or response text message
 
         Returns: instance from ListAllPickupResponse
 
         """
-        self.fromJSONPayload(jsonResponseObj)
+        self.fromResponseObj(res)
 
-    def fromJSONPayload(self, jsonResponseObj):
+    def fromResponseObj(self, res):
         """
         Extract pickups from json response object
 
         Parameters:
-        jsonResponse (dict): JSON response object
+        res (dict, str): JSON response object or response text message
 
         """
-        if jsonResponseObj.get("data"):
-            self.pickups = jsonResponseObj["data"]["pickups"]
-            self.message = jsonResponseObj["message"]
-            self.success = jsonResponseObj["success"]
+        if res.get("data"):
+            self.pickups = res["data"]["pickups"]
+            self.message = res["message"]
+            self.success = res["success"]
         else:
             self.pickups = []
-            self.message = str(jsonResponseObj)
+            self.message = str(res)
 
     def __str__(self):
         return self.message

@@ -1,30 +1,30 @@
 
 
 class UpdatePickupResponse:
-    def __init__(self, jsonResponse):
+    def __init__(self, res):
         """
         Initialize new instance from UpdatePickupResponse class
 
         Parameters:
-        jsonResponse (dict): JSON response object
+        res (dict, str): JSON response object or response text message
 
         Returns:
         instance from UpdatePickupResponse
 
         """
-        self.fromJSONResponse(jsonResponse)
+        self.fromResponseObj(res)
 
-    def fromJSONResponse(self, jsonResponse):
+    def fromResponseObj(self, res):
         """
         Extract message field from json response object
 
         Parameters:
-        jsonResponse (dict): JSON response object
+        res (dict, str): JSON response object or response text message
         """
-        if jsonResponse.get('message') is not None:
-            self.message= jsonResponse["message"]
+        if res.get('message') is not None:
+            self.message= res["message"]
         else:
-            self.message = str(jsonResponse)
+            self.message = str(res)
 
     def __str__(self):
         return self.message
