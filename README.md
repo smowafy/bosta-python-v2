@@ -108,7 +108,7 @@ pip install bostaSDK
     # 1. Create new instance from PrintAWBRequest
     #   Parameters:
     #       deliveryIds (array): List of delivery ids
-    printAWBreq = delivery.printAWB.PrintAWBRequest([deliveryId])
+    printAWBreq = delivery.printAWB.PrintAWBRequest(deliveryId)
 
     # 2. Send Print Airway bill request
     #   Parameters:

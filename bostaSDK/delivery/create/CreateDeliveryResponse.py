@@ -31,9 +31,11 @@ class CreateDeliveryResponse:
             _id = jsonResponse["data"]["_id"]
             trackingNumber = jsonResponse["data"]["trackingNumber"]
             message = jsonResponse["data"]["message"]
+        else:
+            self.message = str(jsonResponse)
+            self._id = self.trackingNumber = None
+        return _id, trackingNumber, message
 
-            return _id, trackingNumber, message
-        return str(jsonResponse.message)
 
     def get_deliveryId(self):
         return self._id

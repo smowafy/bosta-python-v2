@@ -44,7 +44,7 @@ class Delivery:
             params = listAllDeliveriesRequest.toUrlQueryParamters()
             response = self.apiClient.send('get', url, params=params)
             if (response.status_code) != 200:
-                return response.text
+                return ListAllDeliveriesResponse(response.text)
             instance = ListAllDeliveriesResponse(response.json())
             return instance
         except Exception as exp:
@@ -66,7 +66,7 @@ class Delivery:
                 str(getDeliveryDetailsRequest.get_deliveryId())
             response = self.apiClient.send('get', url)
             if (response.status_code) != 200:
-                return response.text
+                return GetDeliveryDetailsResponse(response.text)
             return GetDeliveryDetailsResponse(response.json())
         except Exception as exp:
             logging.error(exp)
@@ -86,7 +86,7 @@ class Delivery:
             url = "/deliveries/awb" +  str(printAWBRequest.get_deliveryId())
             response = self.apiClient.send('get', url)
             if (response.status_code) != 200:
-                return response.text
+                return PrintAWBResponse(response.text)
             return PrintAWBResponse(response.json())
         except Exception as exp:
             logging.error(exp)
@@ -111,7 +111,7 @@ class Delivery:
             response = self.apiClient.send(
                 'post', url, headers=headers, data=payload)
             if (response.status_code) != 201 or (response.status_code) != 200:
-                return response.text
+                return CreateDeliveryResponse(response.text)
             return CreateDeliveryResponse(response.json())
         except Exception as exp:
             logging.error(exp)
@@ -132,7 +132,7 @@ class Delivery:
             payload = updateDeliveryRequest.toJSONPayload()
             response = self.apiClient.send('patch', url, data=payload)
             if (response.status_code) != 200:
-                return response.text
+                return UpdateDeliveryResponse(response.text)
             return UpdateDeliveryResponse(response.json())
         except Exception as exp:
             logging.error(exp)
@@ -153,7 +153,7 @@ class Delivery:
                 str(terminateDeliveryRequest.get_deliveryId())
             response = self.apiClient.send('delete', url)
             if (response.status_code) != 200:
-                return response.text
+                return TerminateDeliveryResponse(response.text)
             return TerminateDeliveryResponse(response.json())
         except Exception as exp:
             logging.error(exp)
@@ -174,7 +174,7 @@ class Delivery:
                 str(trackDeliveryRequest.get_deliveryId()) + "/tracking"
             response = self.apiClient.send('get', url)
             if (response.status_code) != 200:
-                return response.text
+                return TrackDeliveryResponse(response.text)
             return TrackDeliveryResponse(response.json())
         except Exception as exp:
             logging.error(exp)
