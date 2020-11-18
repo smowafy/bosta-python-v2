@@ -128,9 +128,9 @@ class Delivery:
         """
         try:
             logging.info('Update Delivery')
-            url = "/deliveries/" + str(updateDeliveryRequest.get_deliveryId())
+            url = "/deliveries/" + updateDeliveryRequest.get_deliveryId()
             payload = updateDeliveryRequest.toJSONPayload()
-            response = self.apiClient.send('patch', url, data=payload)
+            response = self.apiClient.send('put', url, data=payload)
             if response.status_code != 200:
                 return UpdateDeliveryResponse(response.text)
             return UpdateDeliveryResponse(response.json())

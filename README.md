@@ -170,13 +170,13 @@ pip install bostaSDK
     # 1. Create new instance from TerminateDeliveryRequest
     #   Parameters:
     #       deliveryId (str)
-    terminateDeliveryRequest = delivery.terminate.TerminateDeliveryReque(deliveryId)
+    terminateDeliveryRequest = delivery.terminate.TerminateDeliveryRequest(deliveryId)
 
     # 2. Send terminate delivery request
     #   Parameters:
     #       terminateDeliveryRequest (TerminateDeliveryRequest)
-    apiClient.delivery.terminate(terminateDeliveryRequest)
-
+    terminateDeliveryResponse = apiClient.delivery.terminate(terminateDeliveryRequest)
+    terminateDeliveryResponse.get_message()
 
     ################ Pickups ################# 
     ################ Create New Pickup #################
