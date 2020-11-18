@@ -25,7 +25,8 @@ class GetPickupDetailsResponse:
         res (dict, str): JSON response object or response text message
         """
         if type(res) is dict and res.get("data") is not None:
-
+            self.message = res.get("message")
+            self.success = res.get("success")
             pickup = res["data"]
             self._id = pickup["_id"]
             self.puid = pickup["puid"]
@@ -40,6 +41,7 @@ class GetPickupDetailsResponse:
             self.tickets = pickup["tickets"]
         else:
             self.message = str(res)
+            self.success = False
 
     def __str__(self):
         return self._id or self.message
