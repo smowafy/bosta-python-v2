@@ -22,23 +22,16 @@ class TrackDeliveryResponse:
         if type(res) is dict and res.get("data") is not None:
             self.message = res["message"]
             self.success = res["success"]
-            self.state_history = []
-            if res["data"].get("_id"):
-                for obj in res["data"]["state-history"]:
-                    self.state_history.append({
-                        "state": obj["state"],
-                        "time": obj["timestamp"],
-                        "takenBy": obj["takenBy"]["userName"]
-                    })
-                self._id = res["data"]["_id"]
-                self.trackingNumber = res["data"]["trackingNumber"]
+            self.tracking = res["data"]
         else:
             self.message = str(res)
+            self.success = False
+            self.tracking = None
 
     def __str__(self):
-        return str(self._id) or self.message
+        return self.message
     def get_message(self):
         return self.message 
-    def get_state_history(self):
-        return self.state_history or None
+    def get_tracking(self):
+        return self.tracking
 
