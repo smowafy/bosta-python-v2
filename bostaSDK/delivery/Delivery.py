@@ -43,7 +43,7 @@ class Delivery:
             url = "/deliveries"
             params = listAllDeliveriesRequest.toUrlQueryParamters()
             response = self.apiClient.send('get', url, params=params)
-            if (response.status_code) != 200:
+            if response.status_codes != 200:
                 return ListAllDeliveriesResponse(response.text)
             instance = ListAllDeliveriesResponse(response.json())
             return instance
@@ -83,7 +83,7 @@ class Delivery:
         """
         try:
             logging.info("Print airway bill")
-            url = "/deliveries/awb" +  str(printAWBRequest.get_deliveryId())
+            url = "/deliveries/awb/" +  str(printAWBRequest.get_deliveryId())
             response = self.apiClient.send('get', url)
             if (response.status_code) != 200:
                 return PrintAWBResponse(response.text)
