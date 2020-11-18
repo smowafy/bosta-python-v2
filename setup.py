@@ -2,7 +2,7 @@ from setuptools import setup, Extension, find_packages
 
 setup(
     name='bostaSDK',
-    version='2.0',
+    version='2.0.1',
     author='bosta',
     author_email='sdk@bosta.com',
     scripts=[],

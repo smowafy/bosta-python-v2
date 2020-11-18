@@ -43,7 +43,7 @@ class Delivery:
             url = "/deliveries"
             params = listAllDeliveriesRequest.toUrlQueryParamters()
             response = self.apiClient.send('get', url, params=params)
-            if (response.status_codes) != 200:
+            if (response.status_code) != 200:
                 return ListAllDeliveriesResponse(response.text)
             instance = ListAllDeliveriesResponse(response.json())
             return instance
