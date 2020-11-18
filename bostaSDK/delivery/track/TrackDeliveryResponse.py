@@ -23,14 +23,15 @@ class TrackDeliveryResponse:
             self.message = res["message"]
             self.success = res["success"]
             self.state_history = []
-            for obj in res["data"]["state-history"]:
-                self.state_history.append({
-                    "state": obj["state"],
-                    "time": obj["timestamp"],
-                    "takenBy": obj["takenBy"]["userName"]
-                })
-            self._id = res["data"]["_id"]
-            self.trackingNumber = res["data"]["trackingNumber"]
+            if res["data"].get("_id"):
+                for obj in res["data"]["state-history"]:
+                    self.state_history.append({
+                        "state": obj["state"],
+                        "time": obj["timestamp"],
+                        "takenBy": obj["takenBy"]["userName"]
+                    })
+                self._id = res["data"]["_id"]
+                self.trackingNumber = res["data"]["trackingNumber"]
         else:
             self.message = str(res)
 

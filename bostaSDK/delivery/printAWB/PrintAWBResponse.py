@@ -30,3 +30,6 @@ class PrintAWBResponse:
     
     def get_data(self):
         return self.data
+    
+    def get_message(self):
+        return self.message
