@@ -59,9 +59,13 @@ class Pickup:
         try:
             logging.info("Update Pickup")
             url = "/pickups/" + str(updatePickupRequest.get_id())
+            headers = {
+                'content-type': 'application/json'
+            }
             response = self.apiClient.send(
                 'put',
                 url,
+                headers=headers,
                 data=updatePickupRequest.toJSONPayload()
             )
             if (response.status_code != 200):

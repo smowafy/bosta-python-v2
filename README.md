@@ -253,7 +253,8 @@ pip install bostaSDK
 
     updatePickupRequest = pickup.update.UpdatePickupRequest(
         newPickupId, 
-        contactPerson=ContactPerson("newUser", "010193155922", "user2@bosta.co")
+        contactPerson=ContactPerson("newUser", "010193155922", "user2@bosta.co"),
+        noOfPackages="200"
     )
       
     # 2. Send update pickup request

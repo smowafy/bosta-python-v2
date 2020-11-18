@@ -130,7 +130,10 @@ class Delivery:
             logging.info('Update Delivery')
             url = "/deliveries/" + updateDeliveryRequest.get_deliveryId()
             payload = updateDeliveryRequest.toJSONPayload()
-            response = self.apiClient.send('put', url, data=payload)
+            headers = {
+                "content-type": "application/json"
+            }
+            response = self.apiClient.send('put', url, headers=headers, data=payload)
             if response.status_code != 200:
                 return UpdateDeliveryResponse(response.text)
             return UpdateDeliveryResponse(response.json())
