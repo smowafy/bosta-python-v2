@@ -28,3 +28,8 @@ class DeletePickupResonse:
 
     def __str__(self):
         self.message
+    
+    def get_message(self):
+        return self.message
+
+

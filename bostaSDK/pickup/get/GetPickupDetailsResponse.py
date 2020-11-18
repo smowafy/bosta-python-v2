@@ -43,3 +43,6 @@ class GetPickupDetailsResponse:
 
     def __str__(self):
         return self._id or self.message
+    def get_message(self):
+        return self.message
+

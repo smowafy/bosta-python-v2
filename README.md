@@ -170,7 +170,7 @@ pip install bostaSDK
     # 1. Create new instance from TerminateDeliveryRequest
     #   Parameters:
     #       deliveryId (str)
-    terminateDeliveryRequest = delivery.terminate.TerminateDeliveryRequet(deliveryId)
+    terminateDeliveryRequest = delivery.terminate.TerminateDeliveryReque(deliveryId)
 
     # 2. Send terminate delivery request
     #   Parameters:

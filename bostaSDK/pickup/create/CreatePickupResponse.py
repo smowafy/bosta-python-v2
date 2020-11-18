@@ -44,4 +44,7 @@ class CreatePickupResponse:
     
     def get_pickupId(self):
         return self._id
+
+    def get_message(self):
+        return self.message
     
