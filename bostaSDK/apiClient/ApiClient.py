@@ -57,7 +57,7 @@ class ApiClient:
             """
             headers['X-Requested-By'] = 'python-sdk'
             headers['Authorization'] = self.apiKey
-            url = self.apiBase + "/api/v1" + url
+            url = self.apiBase + "/api/v2" + url
             return getattr(requests, method)(
                 url, headers=headers, params=params, data=data
             )
