@@ -4,7 +4,7 @@ from ..delivery import Delivery
 from ..pickup import Pickup
 
 from ..city import City
-from ..zone import Zone
+from ..district import District
 
 from ..utils import DELIVERY_TYPES
 from ..utils import PICKUP_TIME_SLOTS
@@ -27,17 +27,34 @@ class ApiClient:
         self.apiBase = apiBase
         self.pickup = Pickup(self)
         self.delivery = Delivery(self)
-        self.cities = City(self).listAll()
-        self.zones = Zone(self).listAll()
+        self.cities = City(self)
+        self.districts = District(self)
         self.deliveyTypes = DELIVERY_TYPES
         self.pickupTimeSlots = PICKUP_TIME_SLOTS
+
+
+        self.citiesAll = City(self).listAll()
+        self.districtsAll = District(self).listAll()
+
+        self.EGYPT_COUNTRY_ID = '60e4482c7cb7d4bc4849c4d5'
+        self.KSA_COUNTRY_ID = 'eF-3f9FZr'
+
+        self.countries = [
+            {
+                "id": self.EGYPT_COUNTRY_ID,
+                "name": "Egypt"
+            },
+            {
+                "id": self.KSA_COUNTRY_ID,
+                "name": "Kingdom of Saudi Arabia"
+            }
+        ]
 
     def get_apiKey(self): return self.apiKey
     def get_apiBase(self): return self.apiBase
     def get_delivery(self): return self.delivery
     def get_pickup(self): return self.pickup
-    def get_cities(self): return self.cities
-    def get_zones(self): return self.zones
+    def get_cities(self): return self.citiesAll
 
     def send(self, method, url, headers={}, params=None, data=None):
         try:

@@ -1,11 +1,11 @@
-class City:
+class District:
     def __init__(self, apiClient):
         self.apiClient = apiClient
 
     def listAll(self):
-        """ List all citites
+        """ List all districts
 
-        Returns: List of available cities
+        Returns: List of available districts
         """
         try:
             headers = {
@@ -13,7 +13,7 @@ class City:
             }
             response = self.apiClient.send(
                 'get',
-                "/cities",
+                "/cities/getAllDistricts",
                 headers
             )
             if (response.status_code != 200):
@@ -22,13 +22,13 @@ class City:
         except Exception as exp:
             raise exp
 
-    def listForCountry(self, countryId):
-        """ List all cities for country
+    def listForCity(self, cityId):
+        """ List all districts for a city
 
         Parameters:
-        countryId (int)
+        cityId (int)
 
-        Returns: List of available cities
+        Returns: List of available districts for a city
         """
         try:
             headers = {
@@ -36,9 +36,8 @@ class City:
             }
             response = self.apiClient.send(
                 'get',
-                "/cities",
-                headers,
-                params={ "countryId": countryId }
+                "/cities/{}/districts".format(cityId),
+                headers
             )
             if (response.status_code != 200):
                 return response.text
