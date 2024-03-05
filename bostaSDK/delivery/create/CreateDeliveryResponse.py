@@ -26,14 +26,20 @@ class CreateDeliveryResponse:
         trackingNumber (str): Delivery trackingNumber
         message (str): Create delivery response message
         """
+
         if type(res) is dict and res.get('data') is not None:
+            self.success = True
             self._id = res["data"]["_id"]
             self.trackingNumber = res["data"]["trackingNumber"]
             self.message = res["data"]["message"]
         else:
+            self.success = False
             self.message = str(res)
             self._id = self.trackingNumber = None
 
+
+    def get_success(self):
+        return self.success
 
     def get_deliveryId(self):
         return self._id

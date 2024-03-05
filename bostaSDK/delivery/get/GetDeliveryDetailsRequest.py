@@ -1,18 +1,18 @@
 
 
 class GetDeliveryDetailsRequest:
-    def __init__(self, deliveryId):
+    def __init__(self, trackingNumber):
         """ Initialize new instance from GetDeliveryDetailsRequest class
 
         Parameters:
-        deliveryId (str): Delivery id
+        trackingNumber (str): Tracking Number
 
         Returns: New instance from GetDeliveryDetailsRequest class
         """
-        self._id = deliveryId
+        self.trackingNumber = trackingNumber
 
     def __str__(self):
-        return str(self._id)
+        return str(self.trackingNumber)
 
-    def get_deliveryId(self):
-        return self._id
+    def get_trackingNumber(self):
+        return self.trackingNumber

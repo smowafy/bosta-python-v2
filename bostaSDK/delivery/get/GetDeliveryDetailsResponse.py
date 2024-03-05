@@ -35,7 +35,6 @@ class GetDeliveryDetailsResponse:
             self.trackingNumber = data["trackingNumber"]
             self.holder = data["holder"]
             self.timeline = data["timeline"]
-            self.history = data["history"]
             self.creationTimestamp = data["creationTimestamp"]
         else:
             self.message = str(res)

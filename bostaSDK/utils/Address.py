@@ -1,30 +1,36 @@
+from typing import Optional
+
 class Address:
     def __init__(
-        self, cityCode: str, firstLine: str, zone=None,
-        secondLine=None, district=None, buildingNumber=None,
-        floor=None, apartment=None
+        self, city: str, firstLine: str, districtId: str,
+        secondLine: str, buildingNumber: int, floor: int,
+        apartment: int, isWorkAddress: bool=False,
+        zoneId: Optional[str]=None
     ):
         """ Initialize new instance from Address class
 
         Parameters:
-        cityCode (str)
-        zone (str)
+        city (str)
+        firstLine (str)
+        districtId (str)
         secondLine (str)
-        district (str)
         buildingNumber (int)
         floor (int)
         apartment (int)
+        isWorkAddess (bool) [optional]
+        zoneId (str) [optional]
 
         Returns: New instance from Address class
         """
-        self.cityCode = cityCode
+        self.city = city
         self.firstLine = firstLine
-        self.zone = zone
+        self.zoneId = zoneId
         self.secondLine = secondLine
-        self.district = district
+        self.districtId = districtId
         self.buildingNumber = buildingNumber
         self.floor = floor
         self.apartment = apartment
+        self.isWorkAddress = isWorkAddress
 
     def get_firstLine(self):
         return self.firstLine
@@ -33,10 +39,13 @@ class Address:
         return self.secondLine
 
     def get_city(self):
-        return self.cityCode
+        return self.city
 
-    def get_zone(self):
-        return self.zone
+    def get_zoneId(self):
+        return self.zoneId
+
+    def get_districtId(self):
+        return self.districtId
 
     def toJSON(self):
         """
@@ -45,21 +54,17 @@ class Address:
 
         """
         addressObj = {
-            "cityCode": self.cityCode,
-            "firstLine": self.firstLine
+            "city": self.city,
+            "firstLine": self.firstLine,
+            "districtId": self.districtId,
+            "isWorkAddress": self.isWorkAddress,
+            "secondLine": self.secondLine,
+            "buildingNumber": self.buildingNumber,
+            "floor": self.floor,
+            "apartment": self.apartment
         }
-        if self.zone is not None:
-            addressObj["zone"] = self.zone
-        if self.secondLine is not None:
-            addressObj["secondLine"] = self.secondLine
-        if self.district is not None:
-            addressObj["district"] = self.district
-        if self.buildingNumber is not None:
-            addressObj["buildingNumber"] = self.buildingNumber
-        if self.floor is not None:
-            addressObj["floor"] = self.floor
-        if self.apartment is not None:
-            addressObj["apartment"] = self.apartment
+        if self.zoneId is not None:
+            addressObj["zoneId"] = self.zoneId
 
         return addressObj
 

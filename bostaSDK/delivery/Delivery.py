@@ -62,8 +62,8 @@ class Delivery:
         """
         try:
             logging.info('Get Delivery')
-            url = "/deliveries/" + \
-                str(getDeliveryDetailsRequest.get_deliveryId())
+            url = "/deliveries/business/" + \
+                str(getDeliveryDetailsRequest.get_trackingNumber())
             response = self.apiClient.send('get', url)
             if (response.status_code) != 200:
                 return GetDeliveryDetailsResponse(response.text)
@@ -110,7 +110,7 @@ class Delivery:
             }
             response = self.apiClient.send(
                 'post', url, headers=headers, data=payload)
-            if (response.status_code) != 200:
+            if (response.status_code) not in [200, 201]:
                 return CreateDeliveryResponse(response.text)
             return CreateDeliveryResponse(response.json())
         except Exception as exp:
@@ -152,8 +152,9 @@ class Delivery:
         """
         try:
             logging.info("Terminate Delivery")
-            url = "/deliveries/" + \
-                str(terminateDeliveryRequest.get_deliveryId())
+            url = "/deliveries/business/" + \
+                str(terminateDeliveryRequest.get_trackingNumber()) + \
+                "/terminate"
             response = self.apiClient.send('delete', url)
             if (response.status_code) != 200:
                 return TerminateDeliveryResponse(response.text)
