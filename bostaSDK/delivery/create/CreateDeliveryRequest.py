@@ -12,6 +12,7 @@ class CreateDeliveryRequest:
         dropOffAddress: Address, receiver: Receiver,
         deliverySpecs=None, notes=None,
         businessReference=None,
+        webhookUrl=None,
         ):
         """ Initialize new instance from CreateDeliveryRequest class
 
@@ -32,6 +33,7 @@ class CreateDeliveryRequest:
         self.cod = cod
         self.dropOffAddress = dropOffAddress
         self.receiver = receiver
+        self.webhookUrl = webhookUrl
 
     def toJSONPayload(self):
         """
@@ -39,9 +41,14 @@ class CreateDeliveryRequest:
         JSON object from current instance
 
         """
-        return json.dumps({
+        res = {
             "type": self.type,
             "cod": self.cod,
             "dropOffAddress": self.dropOffAddress.toJSON(),
             "receiver": self.receiver.toJSON()
-        })
+        }
+
+        if self.webhookUrl is not None:
+            res['webhookUrl'] = self.webhookUrl
+
+        return json.dumps(res)
